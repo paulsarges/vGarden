@@ -1,14 +1,23 @@
 package vgarden.model;
 
+
 public class Admin extends Compte {
 
 	public Admin() {
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "Admin [id=" + id + ", login=" + login + ", password=" + password + ", typeCompte=" + typeCompte + "]";
+
+	public double NombreTransaction() {
+		return 0;
+	}
+	
+	static double totalTaxexObtenus() {
+		return 0;
+	}
+	
+	static void supprimerCompte(Utilisateur u) {
+		
 	}
 
 	
