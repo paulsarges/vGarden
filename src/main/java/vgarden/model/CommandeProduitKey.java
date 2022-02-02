@@ -14,7 +14,7 @@ public class CommandeProduitKey implements Serializable {
     private Commande commande;
 
     @ManyToOne
-    @JoinColumn(name = "commande_produit_produit_id", foreignKey = @ForeignKey(name = "commande_produit_commande_id_fk"))
+    @JoinColumn(name = "commande_produit_produit_id", foreignKey = @ForeignKey(name = "commande_produit_produit_id_fk"))
     private Produit produit;
 
     public CommandeProduitKey() {
