@@ -5,3 +5,4 @@ bin/
 .projet
 .settings/
 target/
+.idea/

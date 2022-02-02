@@ -1,31 +1,36 @@
 package vgarden.model;
 
+import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
+@Entity
+@Table(name = "commande")
+@SequenceGenerator(name = "seqCommande", sequenceName = "seq_commande", initialValue = 50, allocationSize = 1)
 public class Commande {
-	private Integer id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCommande")
+	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "commande_compte_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"))
 	private Compte compte; // Seulement Particulier ?? (private Particulier compte)
-	// JPA - @OneToMany
+
+	@OneToMany(mappedBy = "id.commande")
 	private List<CommandeProduit> commandeProduits;
-	
-	/**
-	 * Permet la création d'une commande.
-	 * @param compte Le compte lié à la commande.
-	 */
-	public Commande(Compte compte) {
-		super();
-		this.compte = compte;
+
+	public Commande() {
+
 	}
-	
+
 	/**
 	 * Constructeur de la commande.
-	 * @param id - Id de la commande.
 	 * @param compte - Le compte qui a passé la commande.
 	 * @param commandeProduits - Les produits associés à la commande.
 	 */
-	public Commande(Integer id, Compte compte, List<CommandeProduit> commandeProduits) {
+	public Commande(Compte compte, List<CommandeProduit> commandeProduits) {
 		super();
-		this.id = id;
 		this.compte = compte;
 		this.commandeProduits = commandeProduits;
 	}
@@ -34,11 +39,11 @@ public class Commande {
 	 * L'Id de la commande.
 	 * @return Id de la commande.
 	 */
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -67,8 +72,15 @@ public class Commande {
 	}
 
 	@Override
-	public String toString() {
-		return "Commande [id=" + id + ", compte=" + compte + ", commandeProduits=" + commandeProduits + "]";
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Commande commande = (Commande) o;
+		return id.equals(commande.id);
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }
