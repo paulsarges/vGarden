@@ -1,4 +1,4 @@
-package PotagerMaven.model;
+package vgarden.model;
 
 import java.util.Objects;
 

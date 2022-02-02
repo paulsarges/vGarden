@@ -1,4 +1,4 @@
-package PotagerMaven.model;
+package vgarden.model;
 
 public class Produit {
 	private Integer id;
