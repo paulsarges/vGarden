@@ -3,10 +3,15 @@ package vgarden.model;
 import java.util.List;
 
 
+
+
 public class Terrain {
 	private int surface;
 	private String localisation;
 	private double durreExpoSoleil;
+	private double decoupageTerrainLongeur;
+	private double decoupageTerrainLargeur;
+	private TypeDeSol typeDeSol;
 	private List<Plante> plantes;
 	
 	public Terrain(int surface, String localisation, double durreExpoSoleil) {
@@ -55,13 +60,37 @@ public class Terrain {
 		this.plantes.remove(p);
 	}
 
+	
+
+	public double getDecoupageTerrainLongeur() {
+		return decoupageTerrainLongeur;
+	}
+
+	public void setDecoupageTerrainLongeur(double decoupageTerrainLongeur) {
+		this.decoupageTerrainLongeur = decoupageTerrainLongeur;
+	}
+
+	public double getDecoupageTerrainLargeur() {
+		return decoupageTerrainLargeur;
+	}
+
+	public void setDecoupageTerrainLargeur(double decoupageTerrainLargeur) {
+		this.decoupageTerrainLargeur = decoupageTerrainLargeur;
+	}
+
+	public TypeDeSol getTypeDeSol() {
+		return typeDeSol;
+	}
+
+	public void setTypeDeSol(TypeDeSol typeDeSol) {
+		this.typeDeSol = typeDeSol;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Terrain [surface=" + surface + ", localisation=" + localisation + ", durreExpoSoleil=" + durreExpoSoleil
 				+ "]";
 	}
-	
-	
-	
 	
 }

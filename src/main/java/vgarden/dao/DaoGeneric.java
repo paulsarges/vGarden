@@ -1,4 +1,4 @@
-package PotagerMaven.dao;
+package vgarden.dao;
 
 import java.util.List;
 

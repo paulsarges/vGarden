@@ -1,4 +1,4 @@
-package PotagerMaven;
+package vgarden;
 
 import java.util.Scanner;
 
