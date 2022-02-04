@@ -18,7 +18,7 @@ public class Commande {
 	private Compte compte; // Seulement Particulier ?? (private Particulier compte)
 
 	@OneToMany(mappedBy = "id.commande")
-	private List<CommandeProduit> produits;
+	private List<CommandeProduit> commandeProduits;
 
 	public Commande() {
 
@@ -32,7 +32,7 @@ public class Commande {
 	public Commande(Compte compte, List<CommandeProduit> commandeProduits) {
 		super();
 		this.compte = compte;
-		this.produits = commandeProduits;
+		this.commandeProduits = commandeProduits;
 	}
 
 	/**
@@ -63,12 +63,25 @@ public class Commande {
 	 * Récupère les produits associés à la commande.
 	 * @return Produits associés à la commande.
 	 */
-	public List<CommandeProduit> getProduits() {
-		return produits;
+	public List<CommandeProduit> getCommandeProduits() {
+		return commandeProduits;
 	}
 
 	public void setProduits(List<CommandeProduit> commandeProduits) {
-		this.produits = commandeProduits;
+		this.commandeProduits = commandeProduits;
+	}
+
+	/**
+	 * Recupère le prix total de la commande
+	 * par rapport au prix et à la quantité de chaque produit
+	 * associé à la commande.
+	 * @return Le prix total de la commande.
+	 */
+	public double prixTotal() {
+		return commandeProduits
+				.stream()
+				.mapToDouble(commandeProduit -> commandeProduit.getId().getProduit().getPrix() * commandeProduit.getQuantite())
+				.sum();
 	}
 
 	@Override

@@ -46,9 +46,9 @@ public class DaoCommandeJpaImpl implements DaoCommande {
     }
 
     @Override
-    public Commande findByIdWithProduits(Long id) {
+    public Commande findByIdWithCommandeProduits(Long id) {
         TypedQuery<Commande> query = em.createQuery(
-                "select commande from Commande commande left join fetch commande.produits where commande.id=:id", Commande.class);
+                "select commande from Commande commande left join fetch commande.commandeProduits where commande.id=:id", Commande.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }

@@ -32,6 +32,14 @@ public class CommandeProduit {
 		this.id = id;
 	}
 
+	public Integer getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(Integer quantite) {
+		this.quantite = quantite;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -44,4 +52,5 @@ public class CommandeProduit {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 }
