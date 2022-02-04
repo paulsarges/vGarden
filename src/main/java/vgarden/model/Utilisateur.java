@@ -24,7 +24,7 @@ import javax.persistence.Transient;
 })
 public class Utilisateur extends Compte{
 	
-	protected double taxe;
+	protected double taxe; 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "civilite", length = 4)
 	private Civilite civilite;

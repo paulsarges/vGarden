@@ -39,7 +39,7 @@ public class Commande {
 	
 	@OneToMany(mappedBy = "id.commande")
 	private List<CommandeProduit> commandeProduits;
-
+ 
 	public Commande() {
 
 	}

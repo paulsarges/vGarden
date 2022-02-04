@@ -32,3 +32,4 @@ public class CompteRepositoryTest {
 		amdinRepo.save(admin);
 	}
 }
+ 

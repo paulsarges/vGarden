@@ -38,7 +38,7 @@ public class AppConfig {
 		return dataSource;
 	}
 
-	@Bean
+	@Bean 
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource);
