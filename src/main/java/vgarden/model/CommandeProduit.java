@@ -21,7 +21,6 @@ public class CommandeProduit {
 	}
 
 	public CommandeProduit(CommandeProduitKey id, Integer quantite) {
-		super();
 		this.id = id;
 		this.quantite = quantite;
 	}
