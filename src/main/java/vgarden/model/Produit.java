@@ -1,25 +1,37 @@
 package vgarden.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "produit")
+@SequenceGenerator(name = "seqProduit", sequenceName = "seq_produit", initialValue = 50, allocationSize = 1)
 public class Produit {
-	private Integer id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProduit")
+	private Long id;
+
 	private String nom;
 	private double stock;
 	private double prix;
 	// private Plante plante;
-	
-	public Produit(Integer id, String nom, double stock, double prix) {
+
+	public Produit() {
+
+	}
+
+	public Produit(String nom, double stock, double prix) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.stock = stock;
 		this.prix = prix;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -51,6 +63,6 @@ public class Produit {
 	public String toString() {
 		return "Produit [id=" + id + ", nom=" + nom + ", stock=" + stock + ", prix=" + prix + "]";
 	}
-	
+
 
 }

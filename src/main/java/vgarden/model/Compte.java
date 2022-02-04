@@ -8,7 +8,7 @@ public abstract class Compte {
 	protected String login;
 	protected String password;
 	protected String typeCompte;
-	
+
 	public Compte() {
 		super();
 	}
@@ -69,6 +69,4 @@ public abstract class Compte {
 		Compte other = (Compte) obj;
 		return Objects.equals(login, other.login) && Objects.equals(password, other.password);
 	}
-	
-	
 }

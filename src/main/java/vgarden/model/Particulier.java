@@ -1,10 +1,10 @@
 package vgarden.model;
 
 public class Particulier extends Utilisateur {
-	
+
 	private Adresse adresse;
-	private static double taxe;	
-	
+	private static double taxe;
+
 
 	public Particulier() {
 		super();
@@ -25,9 +25,9 @@ public class Particulier extends Utilisateur {
 		return "Particulier [id=" + id + ", login=" + login + ", password=" + password + ", typeCompte=" + typeCompte
 				+ "]";
 	}
-	
-	
-	
-	
+
+
+
+
 
 }
