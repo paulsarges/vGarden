@@ -2,24 +2,34 @@ package vgarden.model;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SequenceGenerator(name = "seqCompte", sequenceName = "seq_compte", initialValue = 100, allocationSize = 1)
 public abstract class Compte {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCompte")
+	@Column(name = "id")
 	protected Long id;
+	@Column(name = "login")
 	protected String login;
+	@Column(name = "password")
 	protected String password;
-	protected String typeCompte;
 
 	public Compte() {
 		super();
 	}
+	
 
-	public Compte(Long id, String login, String password, String typeCompte) {
-		super();
-		this.id = id;
-		this.login = login;
-		this.password = password;
-		this.typeCompte = typeCompte;
-	}
 
 	public Long getId() {
 		return id;
@@ -45,13 +55,6 @@ public abstract class Compte {
 		this.password = password;
 	}
 
-	public String getTypeCompte() {
-		return typeCompte;
-	}
-
-	public void setTypeCompte(String typeCompte) {
-		this.typeCompte = typeCompte;
-	}
 
 	@Override
 	public int hashCode() {

@@ -1,8 +1,19 @@
 package vgarden.model;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @NamedEntityGraph(name = "Commande.CommandeProduits",
@@ -20,9 +31,17 @@ public class Commande {
 	@JoinColumn(name = "commande_compte_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"))
 	private Compte compte; // Seulement Particulier ?? (private Particulier compte)
 
+	@ManyToOne
+	@JoinColumn(name = "commande_vendeur_id_fk", foreignKey = @ForeignKey(name="commande_vendeur_id_fk"))
+	private Utilisateur vendeur;
+	
+	@ManyToOne
+	@JoinColumn(name = "commande_acheteur_id", foreignKey = @ForeignKey(name="commande_acheteur_id_fk"))
+	private Utilisateur acheteur;
+	
 	@OneToMany(mappedBy = "id.commande")
 	private List<CommandeProduit> commandeProduits;
-
+ 
 	public Commande() {
 
 	}
