@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@NamedEntityGraph(name = "Commande.CommandeProduits",
+		attributeNodes = @NamedAttributeNode("commandeProduits"))
 @Table(name = "commande")
 @SequenceGenerator(name = "seqCommande", sequenceName = "seq_commande", initialValue = 50, allocationSize = 1)
 public class Commande {
