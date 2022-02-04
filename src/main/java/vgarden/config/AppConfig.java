@@ -48,7 +48,7 @@ public class AppConfig {
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();
-        jpaProperties.put("hibernate.dialect", env.getProperty("datasource.dialect"));
+        jpaProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
         jpaProperties.put("hibernate.hbm2ddl.auto", "validate");
         jpaProperties.put("hibernate.show_sql", true);
         jpaProperties.put("hibernate.format_sql", true);
