@@ -49,7 +49,7 @@ public class Commande {
 
 	/**
 	 * Recupère le compte qui a passé la commande.
-	 * @return
+	 * @return le compte qui a passé la commande.
 	 */
 	public Compte getCompte() {
 		return compte;
