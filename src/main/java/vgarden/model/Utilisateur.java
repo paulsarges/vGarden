@@ -2,10 +2,21 @@ package vgarden.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "utilisateur")
 public class Utilisateur extends Compte{
 	
 	private double taxe;
-	private List<Commande> commandes;
+	private List<Commande> achats;
+	private List<Commande> ventes;
 	private List<Terrain> terrains;
 	private List<Produit> produits;
 	
@@ -21,9 +32,19 @@ public class Utilisateur extends Compte{
 		this.taxe = taxe;
 	}
 	
-	
-	public List<Commande> getCommandes() {
-		return commandes;
+	public List<Commande> getAchats() {
+		return achats;
+	}	
+
+	public List<Commande> getVentes() {
+		return ventes;
+	}
+	public void setAchats(List<Commande> achats) {
+		this.achats = achats;
+	}
+
+	public void setVentes(List<Commande> ventes) {
+		this.ventes = ventes;
 	}
 
 	public List<Terrain> getTerrains() {
@@ -34,9 +55,6 @@ public class Utilisateur extends Compte{
 		return produits;
 	}
 
-	public void setCommandes(List<Commande> commandes) {
-		this.commandes = commandes;
-	}
 
 	public void setTerrains(List<Terrain> terrains) {
 		this.terrains = terrains;
@@ -63,6 +81,6 @@ public class Utilisateur extends Compte{
 	}
 	public void modifierPrixProduit(){
 		
-	}
+	}	
 	
 }

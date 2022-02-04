@@ -3,7 +3,6 @@ package vgarden.model;
 public class Pro extends Utilisateur {
 	
 	private Adresse adresse;
-	private static double taxe;
 	
 	public Pro() {
 		super();

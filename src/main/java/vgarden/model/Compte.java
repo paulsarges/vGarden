@@ -2,8 +2,21 @@ package vgarden.model;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SequenceGenerator(name = "seqCompte", sequenceName = "seq_compte", initialValue = 100, allocationSize = 1)
 public abstract class Compte {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCompte")
 	protected Long id;
 	protected String login;
 	protected String password;

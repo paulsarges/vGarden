@@ -19,6 +19,7 @@ public class Particulier extends Utilisateur {
 		this.adresse = adresse;
 	}
 
+	
 
 	@Override
 	public String toString() {
