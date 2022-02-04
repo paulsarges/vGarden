@@ -5,6 +5,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class CommandeProduitKey implements Serializable {
@@ -40,5 +41,18 @@ public class CommandeProduitKey implements Serializable {
 
     public void setProduit(Produit produit) {
         this.produit = produit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CommandeProduitKey that = (CommandeProduitKey) o;
+        return commande.equals(that.commande) && produit.equals(that.produit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(commande, produit);
     }
 }

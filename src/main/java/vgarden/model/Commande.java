@@ -11,6 +11,7 @@ public class Commande {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCommande")
+	@Column(name = "commande_id")
 	private Long id;
 
 	@ManyToOne
