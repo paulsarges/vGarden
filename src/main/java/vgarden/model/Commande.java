@@ -27,15 +27,8 @@ public class Commande {
 
 	/**
 	 * Constructeur de la commande.
-	 * @param utilisateur - L'utilisateur qui a passé la commande.
-	 * @param commandeProduits - Les produits associés à la commande.
+	 * @param utilisateur  -L'utilisateur qui a passé la commande.
 	 */
-	/*public Commande(Utilisateur utilisateur, List<CommandeProduit> commandeProduits) {
-		super();
-		this.utilisateur = utilisateur;
-		this.commandeProduits = commandeProduits;
-	}*/
-
 	public Commande(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}

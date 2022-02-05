@@ -8,4 +8,7 @@ import vgarden.model.Commande;
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
     @Query("SELECT c from Commande c join fetch c.commandeProduits where c.id=:id")
     Commande findByIdFetchCommandeProduits(@Param("id") Long id);
+    // TODO: Complete query
+    // @Query("SELECT c from Commande c join fetch c.commandeProduits cp where cp.id.produit.terrain.utilisateur = :ulisateur")
+    // List<Commande> findByVendeurFetchCommandeProduits(@Param("utilisateur") Utilisateur utilisateur);
 }
