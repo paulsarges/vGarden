@@ -20,7 +20,7 @@ public abstract class Compte {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCompte")
 	@Column(name = "id")
 	protected Long id;
-	@Column(name = "login")
+	@Column(name = "login", unique = true)
 	protected String login;
 	@Column(name = "password")
 	protected String password;

@@ -1,19 +1,8 @@
 package vgarden.model;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "commande")
@@ -26,33 +15,22 @@ public class Commande {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "commande_compte_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"))
-	private Compte compte; // Seulement Particulier ?? (private Particulier compte)
+	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"))
+	private Utilisateur utilisateur;
 
-	@ManyToOne
-	@JoinColumn(name = "commande_vendeur_id_fk", foreignKey = @ForeignKey(name="commande_vendeur_id_fk"))
-	private Utilisateur vendeur;
-	
-	@ManyToOne
-	@JoinColumn(name = "commande_acheteur_id", foreignKey = @ForeignKey(name="commande_acheteur_id_fk"))
-	private Utilisateur acheteur;
-	
 	@OneToMany(mappedBy = "id.commande")
 	private List<CommandeProduit> commandeProduits;
- 
+
 	public Commande() {
 
 	}
 
 	/**
 	 * Constructeur de la commande.
-	 * @param compte - Le compte qui a passé la commande.
-	 * @param commandeProduits - Les produits associés à la commande.
+	 * @param utilisateur  -L'utilisateur qui a passé la commande.
 	 */
-	public Commande(Compte compte, List<CommandeProduit> commandeProduits) {
-		super();
-		this.compte = compte;
-		this.commandeProduits = commandeProduits;
+	public Commande(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	/**
@@ -68,15 +46,15 @@ public class Commande {
 	}
 
 	/**
-	 * Recupère le compte qui a passé la commande.
-	 * @return le compte qui a passé la commande.
+	 * Recupère l'utilisateur qui a passé la commande.
+	 * @return l'utilisateur qui a passé la commande.
 	 */
-	public Compte getCompte() {
-		return compte;
+	public Compte getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setCompte(Compte compte) {
-		this.compte = compte;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	/**
