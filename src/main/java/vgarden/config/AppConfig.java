@@ -2,6 +2,7 @@ package vgarden.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -16,9 +17,10 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Properties;
 
 @Configuration
+@ComponentScan(basePackages = { "vgarden.repositories", "vgarden.services" })
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories(basePackages = { "vgarden.repositories", "vgarden.services"})
+@EnableJpaRepositories(basePackages = { "vgarden.repositories" })
 public class AppConfig {
 
 	private final Environment env;

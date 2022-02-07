@@ -16,14 +16,15 @@ public class CommandeProduit {
 	public CommandeProduit() {
 
 	}
-
+	
 	/**
-	 * Constructeur de la Commande Produit
-	 * @param id - Clé composée avec l'id de la commande et l'id du produit.
-	 * @param quantite - Quantité du produit
+	 * Constructeur de Commande Produit
+	 * @param commande - La commande associée au produit
+	 * @param produit - Le produit associé à la commande
+	 * @param quantite - La quantité du produit
 	 */
-	public CommandeProduit(CommandeProduitKey id, Integer quantite) {
-		this.id = id;
+	public CommandeProduit(Commande commande, Produit produit, Integer quantite) {
+		this.id = new CommandeProduitKey(commande, produit);
 		this.quantite = quantite;
 	}
 
