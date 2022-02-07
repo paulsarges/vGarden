@@ -3,11 +3,14 @@ package vgarden.repositories;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import vgarden.config.AppConfig;
 import vgarden.model.*;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class})
@@ -27,6 +30,7 @@ class CommandeRepositoryTest {
 
     @Test
     @Transactional
+    @Commit
     void findByIdAndFetchCommandeProduits() {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setLogin("test");
@@ -38,13 +42,17 @@ class CommandeRepositoryTest {
 
         produitRepository.save(produit);
 
-        Commande commande = new Commande();
-        commande.setUtilisateur(utilisateur);
+        Commande commande = new Commande(utilisateur);
 
         commandeRepository.save(commande);
 
         commandeProduitRepository.save(new CommandeProduit(new CommandeProduitKey(commande, produit), 1));
 
-        System.out.println(commandeRepository.findByIdFetchCommandeProduits(50L));
+        Commande fetchedCommande = commandeRepository.findByIdWithCommandeProduits(50L).orElse(null);
+
+        System.out.println(fetchedCommande.getCommandeProduits().size());
+
+        assertNotNull(fetchedCommande);
+        assertNotNull(fetchedCommande.getCommandeProduits());
     }
 }
