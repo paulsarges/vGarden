@@ -1,6 +1,7 @@
 package vgarden.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -19,6 +20,9 @@ public class Commande {
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"))
 	private Utilisateur utilisateur;
 
+	@Column(name = "commande_date_creation", nullable = false)
+	private LocalDate dateCreation;
+
 	@OneToMany(mappedBy = "id.commande")
 	private Set<CommandeProduit> commandeProduits;
 
@@ -32,6 +36,7 @@ public class Commande {
 	 */
 	public Commande(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+		this.dateCreation = LocalDate.now();
 	}
 
 	/**
@@ -56,6 +61,14 @@ public class Commande {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
+	}
+
+	public LocalDate getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(LocalDate dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 	/**
