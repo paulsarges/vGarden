@@ -4,12 +4,27 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "plantes")
+@SequenceGenerator(name = "seqPlantes", sequenceName = "seq_plantes", initialValue = 20, allocationSize = 1)
 public class Plante {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPlantes")
 	@Column(name = "planteId")
 	private long Id;
-	@Column(name = "planteTerrain")
+	@ManyToOne
+	@JoinColumn(name = "planteTerrain", foreignKey = @ForeignKey(name = "plante_terrain_fk"))	
 	private Terrain terrain;
 	@Column(name = "planteEmplacement")
 	private Emplacement emplacementPlante;
