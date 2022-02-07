@@ -16,7 +16,7 @@ public class Plante {
 	@ManyToOne
 	@JoinColumn(name = "planteTerrain", foreignKey = @ForeignKey(name = "plante_terrain_fk"))
 	private Terrain terrain;
-	@OneToOne(mappedBy = "plante")
+	@Embedded
 	@Column(name = "planteEmplacement")
 	private Emplacement emplacementPlante;
 	@Enumerated(EnumType.STRING)
