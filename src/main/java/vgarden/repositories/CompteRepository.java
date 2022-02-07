@@ -8,6 +8,6 @@ import vgarden.model.Compte;
 import java.util.Optional;
 
 public interface CompteRepository extends JpaRepository<Compte, Long>  {
-	//@Query("c from Compte c where c.login=:login and c.password=:password")
-	//Optional<Compte> findByloginAndPassWord(@Param("login") String login, @Param("password") String password);
+	@Query("select c from Compte c where c.login=:login and c.password=:password")
+	Optional<Compte> findByloginAndPassWord(@Param("login") String login, @Param("password") String password);
 }
