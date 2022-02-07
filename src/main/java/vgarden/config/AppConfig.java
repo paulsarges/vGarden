@@ -18,7 +18,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories(basePackages =  {"vgarden.repositories", "vgarden.services"})
+@EnableJpaRepositories(basePackages = { "vgarden.repositories", "vgarden.services"})
 public class AppConfig {
 
 	private final Environment env;

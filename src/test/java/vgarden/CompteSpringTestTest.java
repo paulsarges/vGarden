@@ -18,7 +18,7 @@ import vgarden.repositories.UtilisateurRepository;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class})
-public class CompteRepositoryTest {
+public class CompteSpringTestTest {
 	@Autowired
 	AdminRepository amdinRepo;
 	@Autowired
