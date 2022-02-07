@@ -39,18 +39,15 @@ class CommandeRepositoryTest {
 
         compteRepository.save(utilisateur);
 
-        Produit produit = new Produit("test", 14, 12.50);
-        Produit produit2 = new Produit("test2", 2, 14.50);
+        Produit produit = new Produit("test", 14, 12.50, null);
 
         produitRepository.save(produit);
-        produitRepository.save(produit2);
 
         Commande commande = new Commande(utilisateur);
 
         commandeRepository.save(commande);
 
         commandeProduitRepository.save(new CommandeProduit(new CommandeProduitKey(commande, produit), 1));
-        commandeProduitRepository.save(new CommandeProduit(new CommandeProduitKey(commande, produit2), 6));
 
         Commande fetchedCommande = commandeRepository.findByIdWithCommandeProduits(50L).orElse(null);
 

@@ -1,18 +1,8 @@
 package vgarden.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 
 @Entity
@@ -24,7 +14,7 @@ public class Plante {
 	@Column(name = "planteId")
 	private long Id;
 	@ManyToOne
-	@JoinColumn(name = "planteTerrain", foreignKey = @ForeignKey(name = "plante_terrain_fk"))	
+	@JoinColumn(name = "planteTerrain", foreignKey = @ForeignKey(name = "plante_terrain_fk"))
 	private Terrain terrain;
 	@Column(name = "planteEmplacement")
 	private Emplacement emplacementPlante;
@@ -39,18 +29,18 @@ public class Plante {
 	@Column(name = "planteBesoinSemi")
 	private boolean besoinSemi; //
 	@Column(name = "planteBesoinFixation")
-	private LocalDate dateRepiquage; // Si besoin semi - A afficher sur l'appli à titre informatif dans la fiche de la plante.
+	private LocalDate dateRepiquage; // Si besoin semi - A afficher sur l'appli ï¿½ titre informatif dans la fiche de la plante.
 	@Column(name = "planteDatePlantation")
 	private LocalDate datePlantation; // A afficher dans la fiche de la plante
 	@Column(name = "planteArrosageOk")
 	private boolean arrosageOk; // Pour la notif d'arrosage.
 	@Column(name = "planteDateRecolte")
-	private LocalDate dateRecolte; // 
+	private LocalDate dateRecolte; //
 	@Column(name = "plante_DatePlantationOptimale")
 	private LocalDate datePlantationOptimale; // Pour conseiller l'utilisateur sur la date de plantation.
 	@Column(name = "plante_DateSemiOptimale")
 	private LocalDate dateSemiOptimale; // Pour conseiller l'utilisateur sur la date de mise en semi.
-	
+
 
 	public Plante() {
 		super();
@@ -144,8 +134,8 @@ public class Plante {
 		this.dateRecolte = dateRecolte;
 	}
 
-	
-	
+
+
 	public boolean isArrosageOk() {
 		return arrosageOk;
 	}
@@ -186,7 +176,7 @@ public class Plante {
 		Plante other = (Plante) obj;
 		return Id == other.Id;
 	}
-	
-	
-	
+
+
+
 }
