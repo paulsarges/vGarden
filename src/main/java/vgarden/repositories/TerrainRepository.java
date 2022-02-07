@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import vgarden.model.Plante;
 import vgarden.model.Terrain;
 import vgarden.model.TypeDeSol;
+import vgarden.model.Utilisateur;
 
 public interface TerrainRepository extends JpaRepository<Terrain, Long>{
 
@@ -18,4 +19,6 @@ public interface TerrainRepository extends JpaRepository<Terrain, Long>{
 	List<Terrain> findByTypeDeSol(TypeDeSol typeDeSol);
 	
 	List<Terrain> findByPlantes(Plante plante);
+	
+	List<Terrain> findByUtilisateur(Utilisateur utilisateur);
 }
