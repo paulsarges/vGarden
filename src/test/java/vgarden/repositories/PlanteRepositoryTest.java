@@ -18,6 +18,7 @@ import vgarden.model.Terrain;
 import vgarden.model.TypeDeSol;
 import vgarden.model.TypePlante;
 
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class})
 class PlanteRepositoryTest {

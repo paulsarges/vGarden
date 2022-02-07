@@ -12,4 +12,5 @@ public interface PlanteRepository extends JpaRepository<Plante, Long> {
 
 	Optional<Plante> findByTerrain(@Param("terrain") Terrain terrain);
 	
+	
 	}
