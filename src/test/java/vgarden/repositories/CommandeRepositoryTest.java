@@ -56,7 +56,7 @@ class CommandeRepositoryTest {
 
         commandeRepository.save(commande);
 
-        commandeProduitRepository.save(new CommandeProduit(new CommandeProduitKey(commande, produit), 1));
+        commandeProduitRepository.save(new CommandeProduit(commande, produit, 1));
 
         Commande fetchedCommande = commandeRepository.findByIdWithCommandeProduits(50L).orElse(null);
 
