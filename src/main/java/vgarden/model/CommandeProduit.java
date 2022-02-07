@@ -16,7 +16,7 @@ public class CommandeProduit {
 	public CommandeProduit() {
 
 	}
-	
+
 	/**
 	 * Constructeur de Commande Produit
 	 * @param commande - La commande associée au produit
