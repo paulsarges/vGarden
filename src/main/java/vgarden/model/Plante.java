@@ -28,7 +28,7 @@ public class Plante {
 	private boolean besoinFixation; // Plantes montantes (tomates etc.)
 	@Column(name = "planteBesoinSemi")
 	private boolean besoinSemi; //
-	@Column(name = "planteBesoinFixation")
+	@Column(name = "planteDateRepiquage")
 	private LocalDate dateRepiquage; // Si besoin semi - A afficher sur l'appli � titre informatif dans la fiche de la plante.
 	@Column(name = "planteDatePlantation")
 	private LocalDate datePlantation; // A afficher dans la fiche de la plante
