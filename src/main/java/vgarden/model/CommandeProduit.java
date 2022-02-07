@@ -17,6 +17,11 @@ public class CommandeProduit {
 
 	}
 
+	/**
+	 * Constructeur de la Commande Produit
+	 * @param id - Clé composée avec l'id de la commande et l'id du produit.
+	 * @param quantite - Quantité du produit
+	 */
 	public CommandeProduit(CommandeProduitKey id, Integer quantite) {
 		this.id = id;
 		this.quantite = quantite;
@@ -30,6 +35,10 @@ public class CommandeProduit {
 		this.id = id;
 	}
 
+	/**
+	 * La quantité du produit
+	 * @return - Quantité du produit
+	 */
 	public Integer getQuantite() {
 		return quantite;
 	}
