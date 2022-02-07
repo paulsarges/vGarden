@@ -1,66 +1,99 @@
 package vgarden.model;
 
 import java.util.List;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
-
-
+@Entity
+@Table(name = "terrain")
+@SequenceGenerator(name = "seqTerrain", sequenceName = "seq_terrain", initialValue = 1, allocationSize = 1)
 public class Terrain {
-	private int surface;
-	private String localisation;
-	private double durreExpoSoleil;
-	private double decoupageTerrainLongeur;
-	private double decoupageTerrainLargeur;
-	private TypeDeSol typeDeSol;
-	private List<Plante> plantes;
 	
-	public Terrain(int surface, String localisation, double durreExpoSoleil) {
-		this.surface = surface;
-		this.localisation = localisation;
-		this.durreExpoSoleil = durreExpoSoleil;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTerrain")
+	private Long id;
+	
+	@Column(name = "surface")
+	private double surface;
+	
+	@Column(name = "localisation", length = 50, nullable = true)
+	private String localisation;
+	
+	@Column(name = "dureeExpoSoleil")
+	private double dureeExpoSoleil;
+	
+	@Column(name = "decoupageTerrainLongeur")
+	private double decoupageTerrainLongeur;
+	
+	@Column(name = "decoupageTerrainLargeur")
+	private double decoupageTerrainLargeur;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "typeDeSol", length = 20)
+	private TypeDeSol typeDeSol;
+	
+	@OneToMany(mappedBy = "terrain")
+	private List<Emplacement> emplacements;
+	
+	
+	public Terrain() {
+		
 	}
 
-	public int getSurface() {
+	public Terrain(double surface, String localisation, double dureeExpoSoleil, double decoupageTerrainLongeur,
+			double decoupageTerrainLargeur, TypeDeSol typeDeSol, List<Emplacement> emplacements) {
+		super();
+		this.surface = surface;
+		this.localisation = localisation;
+		this.dureeExpoSoleil = dureeExpoSoleil;
+		this.decoupageTerrainLongeur = decoupageTerrainLongeur;
+		this.decoupageTerrainLargeur = decoupageTerrainLargeur;
+		this.typeDeSol = typeDeSol;
+		this.emplacements = emplacements;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public double getSurface() {
 		return surface;
+	}
+
+	public void setSurface(double surface) {
+		this.surface = surface;
 	}
 
 	public String getLocalisation() {
 		return localisation;
 	}
 
-	public double getDurreExpoSoleil() {
-		return durreExpoSoleil;
-	}
-
-	public List<Plante> getPlantes() {
-		return plantes;
-	}
-
-	public void setSurface(int surface) {
-		this.surface = surface;
-	}
-
 	public void setLocalisation(String localisation) {
 		this.localisation = localisation;
 	}
 
-	public void setDurreExpoSoleil(double durreExpoSoleil) {
-		this.durreExpoSoleil = durreExpoSoleil;
+	public double getDureeExpoSoleil() {
+		return dureeExpoSoleil;
 	}
 
-	public void setPlantes(List<Plante> plantes) {
-		this.plantes = plantes;
+	public void setDureeExpoSoleil(double dureeExpoSoleil) {
+		this.dureeExpoSoleil = dureeExpoSoleil;
 	}
-	
-	public void ajouterPlantes(Plante p) {
-		this.plantes.add(p);
-	}
-	
-	public void SupprimerPlante(Plante p) {
-		this.plantes.remove(p);
-	}
-
-	
 
 	public double getDecoupageTerrainLongeur() {
 		return decoupageTerrainLongeur;
@@ -85,12 +118,33 @@ public class Terrain {
 	public void setTypeDeSol(TypeDeSol typeDeSol) {
 		this.typeDeSol = typeDeSol;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "Terrain [surface=" + surface + ", localisation=" + localisation + ", durreExpoSoleil=" + durreExpoSoleil
-				+ "]";
+
+	public List<Emplacement> getEmplacements() {
+		return emplacements;
 	}
+
+	public void setEmplacements(List<Emplacement> emplacements) {
+		this.emplacements = emplacements;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Terrain other = (Terrain) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	
+	
 	
 }
