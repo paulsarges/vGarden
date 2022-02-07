@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import vgarden.config.AppConfig;
 import vgarden.model.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class})
 class CommandeRepositoryTest {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private CommandeRepository commandeRepository;
@@ -31,6 +36,11 @@ class CommandeRepositoryTest {
 
     @Autowired
     private CompteRepository compteRepository;
+
+    private void flushAndClear() {
+        em.flush();
+        em.clear();
+    }
 
     @Test
     @Transactional
@@ -59,9 +69,11 @@ class CommandeRepositoryTest {
 
         commandeProduitRepository.save(new CommandeProduit(commande, produit, 1));
 
+        flushAndClear();
+
         Commande fetchedCommande = commandeRepository.findByIdWithCommandeProduits(50L).orElse(null);
 
         assertNotNull(fetchedCommande);
-        // assertNotNull(fetchedCommande.getCommandeProduits());
+        assertNotNull(fetchedCommande.getCommandeProduits());
     }
 }
