@@ -17,5 +17,5 @@ public interface TerrainRepository extends JpaRepository<Terrain, Long>{
 	
 	List<Terrain> findByTypeDeSol(TypeDeSol typeDeSol);
 	
-	List<Terrain> findByPlante(Plante plante);
+	List<Terrain> findByPlantes(Plante plante);
 }
