@@ -1,5 +1,8 @@
 package vgarden.model;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Emplacement {
 	
 	private double positionX;

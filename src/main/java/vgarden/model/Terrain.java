@@ -27,7 +27,7 @@ public class Terrain {
 	@Column(name = "surface")
 	private double surface;
 	
-	@Column(name = "localisation", length = 50, nullable = false)
+	@Column(name = "localisation", length = 50, nullable = true)
 	private String localisation;
 	
 	@Column(name = "dureeExpoSoleil")
