@@ -16,12 +16,15 @@ public class Plante {
 	@ManyToOne
 	@JoinColumn(name = "planteTerrain", foreignKey = @ForeignKey(name = "plante_terrain_fk"))
 	private Terrain terrain;
+	@OneToOne(mappedBy = "plante")
 	@Column(name = "planteEmplacement")
 	private Emplacement emplacementPlante;
+	@Enumerated(EnumType.STRING)
 	@Column(name = "planteType")
 	private TypePlante typePlante;
 	@Column(name = "planteCroissance")
 	private int croissance; //Entre 1 et 4 ?  - Determinera l'image de la plante (ou une barre de croissance).
+	@Enumerated(EnumType.STRING)
 	@Column(name = "planteSolFavori")
 	private TypeDeSol solFavori; // A afficher sur la fiche de la plante.
 	@Column(name = "planteBesoinFixation")
