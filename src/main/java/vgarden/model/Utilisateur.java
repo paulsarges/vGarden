@@ -1,19 +1,8 @@
 package vgarden.model;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
-
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "utilisateur")
@@ -23,8 +12,8 @@ import javax.persistence.Transient;
 					@AttributeOverride(name = "password", column = @Column(name = "utilsateur_password", length = 50, nullable = false))
 })
 public class Utilisateur extends Compte{
-	
-	protected double taxe; 
+
+	protected double taxe;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "civilite", length = 4)
 	private Civilite civilite;
@@ -33,15 +22,17 @@ public class Utilisateur extends Compte{
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type_compte", length = 50, nullable = false)
 	private TypeCompte typeCompte;
-	@OneToMany(mappedBy = "acheteur")
+	@OneToMany(mappedBy = "utilisateur")
 	private Set<Commande> achats;
-	@OneToMany(mappedBy = "vendeur")
-	private Set<Commande> ventes;
+	// Pas besoin, une commande doit être associé à un produit qui lui même est associé à une plante qui
+	// elle même est associé à un terrain qui lui doit être associé à un utilisateur
+	//@OneToMany(mappedBy = "vendeur")
+	//private Set<Commande> ventes;
 	@Transient
 	private List<Terrain> terrains;
 	@Transient
 	private List<Produit> produits;
-	
+
 	public Utilisateur() {
 		super();
 	}
@@ -53,21 +44,21 @@ public class Utilisateur extends Compte{
 	public void setTaxe(double taxe) {
 		this.taxe = taxe;
 	}
-	
+
 	public Set<Commande> getAchats() {
 		return achats;
-	}	
-
-	public Set<Commande> getVentes() {
-		return ventes;
 	}
+
+	/*public Set<Commande> getVentes() {
+		return ventes;
+	}*/
 	public void setAchats(Set<Commande> achats) {
 		this.achats = achats;
 	}
 
-	public void setVentes(Set<Commande> ventes) {
+	/*public void setVentes(Set<Commande> ventes) {
 		this.ventes = ventes;
-	}
+	}*/
 
 	public List<Terrain> getTerrains() {
 		return terrains;
@@ -77,12 +68,12 @@ public class Utilisateur extends Compte{
 		return produits;
 	}
 
-	
+
 	public Adresse getAdresse() {
 		return adresse;
 	}
 
-	
+
 	public Civilite getCivilite() {
 		return civilite;
 	}
@@ -102,7 +93,7 @@ public class Utilisateur extends Compte{
 	public void setProduits(List<Produit> produits) {
 		this.produits = produits;
 	}
-	
+
 
 	public TypeCompte getTypeCompte() {
 		return typeCompte;
@@ -113,22 +104,22 @@ public class Utilisateur extends Compte{
 	}
 
 	public void acheter() {
-		
+
 	}
-	
+
 	public void vendre() {
-		
+
 	}
-	
+
 	public void afficherVente() {
-		
+
 	}
-	
+
 	public void modifierStockProduit() {
-		
+
 	}
 	public void modifierPrixProduit(){
-		
-	}	
-	
+
+	}
+
 }

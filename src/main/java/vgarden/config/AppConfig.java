@@ -1,9 +1,7 @@
 package vgarden.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -23,8 +21,11 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages =  {"vgarden.repositories"})
 public class AppConfig {
 
-	@Autowired
-	private Environment env;
+	private final Environment env;
+
+	public AppConfig(Environment env) {
+		this.env = env;
+	}
 
 	@Bean
 	public BasicDataSource dataSource() {
@@ -38,7 +39,7 @@ public class AppConfig {
 		return dataSource;
 	}
 
-	@Bean 
+	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(BasicDataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource);
@@ -46,7 +47,7 @@ public class AppConfig {
 		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		Properties jpaProperties = new Properties();
 		jpaProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+		jpaProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		jpaProperties.setProperty("hibernate.show_sql", "true");
 		jpaProperties.setProperty("hibernate.format_sql", "true");
 		emf.setJpaProperties(jpaProperties);
