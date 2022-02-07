@@ -31,7 +31,7 @@ public class Utilisateur extends Compte{
 	@Embedded
 	private Adresse adresse;
 	@Enumerated(EnumType.STRING)
-	@Column(name = "type_compte", length = 50)
+	@Column(name = "type_compte", length = 50, nullable = false)
 	private TypeCompte typeCompte;
 	@OneToMany(mappedBy = "acheteur")
 	private Set<Commande> achats;
