@@ -28,7 +28,7 @@ public class Utilisateur extends Compte{
 	// elle même est associé à un terrain qui lui doit être associé à un utilisateur
 	//@OneToMany(mappedBy = "vendeur")
 	//private Set<Commande> ventes;
-	@Transient
+	@OneToMany(mappedBy = "utilisateur")
 	private List<Terrain> terrains;
 	@Transient
 	private List<Produit> produits;
