@@ -44,24 +44,25 @@ public class Terrain {
 	private TypeDeSol typeDeSol;
 	
 	@OneToMany(mappedBy = "terrain")
-	private List<Emplacement> emplacements;
+	private List<Plante> plantes;
 	
 	
 	public Terrain() {
 		
 	}
+	
 
 	public Terrain(double surface, String localisation, double dureeExpoSoleil, double decoupageTerrainLongeur,
-			double decoupageTerrainLargeur, TypeDeSol typeDeSol, List<Emplacement> emplacements) {
-		super();
+			double decoupageTerrainLargeur, TypeDeSol typeDeSol, List<Plante> plantes) {
 		this.surface = surface;
 		this.localisation = localisation;
 		this.dureeExpoSoleil = dureeExpoSoleil;
 		this.decoupageTerrainLongeur = decoupageTerrainLongeur;
 		this.decoupageTerrainLargeur = decoupageTerrainLargeur;
 		this.typeDeSol = typeDeSol;
-		this.emplacements = emplacements;
+		this.plantes = plantes;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -119,12 +120,12 @@ public class Terrain {
 		this.typeDeSol = typeDeSol;
 	}
 
-	public List<Emplacement> getEmplacements() {
-		return emplacements;
+	public List<Plante> getPlantes() {
+		return plantes;
 	}
 
-	public void setEmplacements(List<Emplacement> emplacements) {
-		this.emplacements = emplacements;
+	public void setPlantes(List<Plante> plantes) {
+		this.plantes = plantes;
 	}
 
 	@Override
