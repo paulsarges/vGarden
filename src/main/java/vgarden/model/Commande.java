@@ -20,7 +20,7 @@ public class Commande {
 	private Utilisateur utilisateur;
 
 	@OneToMany(mappedBy = "id.commande")
-	private Set<CommandeProduit> commandeProduits = new HashSet<>();
+	private Set<CommandeProduit> commandeProduits;
 
 	public Commande() {
 
