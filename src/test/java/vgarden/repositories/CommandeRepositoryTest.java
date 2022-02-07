@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import vgarden.config.AppConfig;
 import vgarden.model.*;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
@@ -25,6 +27,9 @@ class CommandeRepositoryTest {
     private ProduitRepository produitRepository;
 
     @Autowired
+    private PlanteRepository planteRepository;
+
+    @Autowired
     private CompteRepository compteRepository;
 
     @Test
@@ -37,7 +42,13 @@ class CommandeRepositoryTest {
 
         compteRepository.save(utilisateur);
 
-        Produit produit = new Produit("test", 14, 12.50, null);
+        Plante plante = new Plante();
+        plante.setTypePlante(TypePlante.Ail);
+        plante.setDatePlantation(LocalDate.now());
+
+        planteRepository.save(plante);
+
+        Produit produit = new Produit("test", 14, 12.50, plante);
 
         produitRepository.save(produit);
 
