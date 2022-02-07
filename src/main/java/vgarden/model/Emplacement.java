@@ -9,17 +9,14 @@ public class Emplacement {
 	
 	private double positionX;
 	private double positionY;
-	private Plante plante;
-	
 		
 	public Emplacement() {
 		
 	}
 
-	public Emplacement(double positionX, double positionY, Plante plante) {
+	public Emplacement(double positionX, double positionY) {
 		this.positionX = positionX;
 		this.positionY = positionY;
-		this.plante = plante;
 	}
 
 	public double getPositionX() {
@@ -38,17 +35,9 @@ public class Emplacement {
 		this.positionY = positionY;
 	}
 
-	public Plante getPlante() {
-		return plante;
-	}
-
-	public void setPlante(Plante plante) {
-		this.plante = plante;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(plante, positionX, positionY);
+		return Objects.hash(positionX, positionY);
 	}
 
 	@Override
@@ -60,9 +49,8 @@ public class Emplacement {
 		if (getClass() != obj.getClass())
 			return false;
 		Emplacement other = (Emplacement) obj;
-		return Objects.equals(plante, other.plante)
-				&& Double.doubleToLongBits(positionX) == Double.doubleToLongBits(other.positionX)
+		return Double.doubleToLongBits(positionX) == Double.doubleToLongBits(other.positionX)
 				&& Double.doubleToLongBits(positionY) == Double.doubleToLongBits(other.positionY);
 	}
-	
+
 }
