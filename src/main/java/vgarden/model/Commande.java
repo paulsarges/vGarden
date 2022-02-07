@@ -1,10 +1,11 @@
 package vgarden.model;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
+/*@NamedEntityGraph(name = "Commande.CommandeProduits",
+		attributeNodes = @NamedAttributeNode("commandeProduits"))*/
 @Table(name = "commande")
 @SequenceGenerator(name = "seqCommande", sequenceName = "seq_commande", initialValue = 50, allocationSize = 1)
 public class Commande {
@@ -19,7 +20,7 @@ public class Commande {
 	private Utilisateur utilisateur;
 
 	@OneToMany(mappedBy = "id.commande")
-	private List<CommandeProduit> commandeProduits;
+	private Set<CommandeProduit> commandeProduits = new HashSet<>();
 
 	public Commande() {
 
@@ -27,7 +28,7 @@ public class Commande {
 
 	/**
 	 * Constructeur de la commande.
-	 * @param utilisateur  -L'utilisateur qui a passé la commande.
+	 * @param utilisateur - L'utilisateur qui a passé la commande.
 	 */
 	public Commande(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
@@ -49,7 +50,7 @@ public class Commande {
 	 * Recupère l'utilisateur qui a passé la commande.
 	 * @return l'utilisateur qui a passé la commande.
 	 */
-	public Compte getUtilisateur() {
+	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 
@@ -61,11 +62,11 @@ public class Commande {
 	 * Récupère les produits associés à la commande.
 	 * @return Produits associés à la commande.
 	 */
-	public List<CommandeProduit> getCommandeProduits() {
+	public Set<CommandeProduit> getCommandeProduits() {
 		return commandeProduits;
 	}
 
-	public void setProduits(List<CommandeProduit> commandeProduits) {
+	public void setCommandeProduits(Set<CommandeProduit> commandeProduits) {
 		this.commandeProduits = commandeProduits;
 	}
 

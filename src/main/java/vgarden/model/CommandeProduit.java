@@ -1,9 +1,6 @@
 package vgarden.model;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -53,5 +50,4 @@ public class CommandeProduit {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 }
