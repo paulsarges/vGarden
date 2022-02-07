@@ -26,6 +26,9 @@ public class Commande {
 	@OneToMany(mappedBy = "id.commande")
 	private Set<CommandeProduit> commandeProduits;
 
+	/**
+	 * Constructeur vide par défaut.
+	 */
 	public Commande() {
 
 	}
@@ -53,7 +56,7 @@ public class Commande {
 
 	/**
 	 * Recupère l'utilisateur qui a passé la commande.
-	 * @return l'utilisateur qui a passé la commande.
+	 * @return - l'utilisateur qui a passé la commande.
 	 */
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
@@ -63,6 +66,10 @@ public class Commande {
 		this.utilisateur = utilisateur;
 	}
 
+	/**
+	 * La date de la création de la commande.
+	 * @return - Date de création de la commande
+	 */
 	public LocalDate getDateCreation() {
 		return dateCreation;
 	}
