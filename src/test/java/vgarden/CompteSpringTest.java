@@ -22,14 +22,21 @@ class CompteSpringTest {
 	CompteServices compteServices;
 
 	@Test
-	@Transactional
-	@Commit
-	void test() {
+	void CreateTest() {
 		Utilisateur pro = new Utilisateur();
 		pro.setLogin("pro1");
-		pro.setPassword("pro1");
+		pro.setPassword("proTest");
 		pro.setTypeCompte(TypeCompte.Pro);
 		compteServices.createOrUpdate(pro);		
+	}
+	
+	@Test
+	void checkCompteTest() {
+		Utilisateur pro = new Utilisateur();
+		pro.setLogin("pro1");
+		pro.setPassword("proTest");
+		pro.setTypeCompte(TypeCompte.Pro);
+		compteServices.checkLogin(pro);
 	}
 
 }

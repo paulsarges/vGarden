@@ -45,6 +45,7 @@ class CommandeRepositoryTest {
         Plante plante = new Plante();
         plante.setTypePlante(TypePlante.Ail);
         plante.setDatePlantation(LocalDate.now());
+        plante.setEmplacementPlante(new Emplacement(1, 2));
 
         planteRepository.save(plante);
 
