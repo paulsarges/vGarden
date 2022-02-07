@@ -9,8 +9,10 @@ public class Produit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProduit")
+	@Column(name = "produit_id")
 	private Long id;
 
+	@Column(name = "produit_nom", length = 50, nullable = false)
 	private String nom;
 	private double stock;
 	private double prix;
