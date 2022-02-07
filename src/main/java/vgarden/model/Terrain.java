@@ -44,7 +44,7 @@ public class Terrain {
 	private TypeDeSol typeDeSol;
 	
 	@OneToMany(mappedBy = "terrain")
-	private List<Plante> plantes;
+	private List<Emplacement> emplacements;
 	
 	
 	public Terrain() {
@@ -52,7 +52,7 @@ public class Terrain {
 	}
 
 	public Terrain(double surface, String localisation, double dureeExpoSoleil, double decoupageTerrainLongeur,
-			double decoupageTerrainLargeur, TypeDeSol typeDeSol, List<Plante> plantes) {
+			double decoupageTerrainLargeur, TypeDeSol typeDeSol, List<Emplacement> emplacements) {
 		super();
 		this.surface = surface;
 		this.localisation = localisation;
@@ -60,9 +60,8 @@ public class Terrain {
 		this.decoupageTerrainLongeur = decoupageTerrainLongeur;
 		this.decoupageTerrainLargeur = decoupageTerrainLargeur;
 		this.typeDeSol = typeDeSol;
-		this.plantes = plantes;
+		this.emplacements = emplacements;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -120,15 +119,14 @@ public class Terrain {
 		this.typeDeSol = typeDeSol;
 	}
 
-	public List<Plante> getPlantes() {
-		return plantes;
+	public List<Emplacement> getEmplacements() {
+		return emplacements;
 	}
 
-	public void setPlantes(List<Plante> plantes) {
-		this.plantes = plantes;
+	public void setEmplacements(List<Emplacement> emplacements) {
+		this.emplacements = emplacements;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -145,5 +143,8 @@ public class Terrain {
 		Terrain other = (Terrain) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
+	
 	
 }
