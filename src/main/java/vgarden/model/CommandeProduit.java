@@ -1,6 +1,10 @@
 package vgarden.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +14,7 @@ public class CommandeProduit {
 	@EmbeddedId
 	private CommandeProduitKey id;
 
+	@Min(1)
 	@Column(name = "commande_produit_quantite", nullable = false)
 	private Integer quantite;
 

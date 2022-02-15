@@ -1,6 +1,7 @@
 package vgarden.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -18,9 +19,10 @@ public class Commande {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"))
+	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"), nullable = false)
 	private Utilisateur utilisateur;
-	
+
+	@NotEmpty
 	@Column(name = "commande_date_creation", nullable = false)
 	private LocalDateTime dateCreation;
 
