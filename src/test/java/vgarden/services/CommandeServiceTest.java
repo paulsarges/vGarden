@@ -22,7 +22,7 @@ class CommandeServiceTest {
 
     @Test
     @Transactional
-    public void createOrUpdateMissingUser() {
+    public void createMissingUser() {
         assertThrows(CommandeException.class, () -> {
             Commande commande = new Commande();
             commandeService.createOrUpdate(commande);
