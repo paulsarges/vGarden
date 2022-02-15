@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import vgarden.config.AppConfig;
 import vgarden.model.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfig.class})
 class CommandeRepositoryTest {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private CommandeRepository commandeRepository;
@@ -32,20 +37,40 @@ class CommandeRepositoryTest {
     @Autowired
     private CompteRepository compteRepository;
 
+    @Autowired
+    private TerrainRepository terrainRepository;
+
+    private void flushAndClear() {
+        em.flush();
+        em.clear();
+    }
+
     @Test
     @Transactional
     void findByIdAndFetchCommandeProduits() {
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setLogin("test");
-        utilisateur.setPassword("test");
-        utilisateur.setTypeCompte(TypeCompte.Particulier);
+        Utilisateur particulier = new Utilisateur();
+        particulier.setLogin("test");
+        particulier.setPassword("test");
+        particulier.setTypeCompte(TypeCompte.Particulier);
 
-        compteRepository.save(utilisateur);
+        Utilisateur pro = new Utilisateur();
+        pro.setLogin("pro");
+        pro.setPassword("pro");
+        pro.setTypeCompte(TypeCompte.Pro);
+
+        compteRepository.save(particulier);
+        compteRepository.save(pro);
+
+        Terrain terrain = new Terrain();
+        terrain.setUtilisateur(pro);
+
+        terrainRepository.save(terrain);
 
         Plante plante = new Plante();
         plante.setTypePlante(TypePlante.Ail);
         plante.setDatePlantation(LocalDate.now());
         plante.setEmplacementPlante(new Emplacement(1, 2));
+        plante.setTerrain(terrain);
 
         planteRepository.save(plante);
 
@@ -53,15 +78,17 @@ class CommandeRepositoryTest {
 
         produitRepository.save(produit);
 
-        Commande commande = new Commande(utilisateur);
+        Commande commande = new Commande(particulier);
 
         commandeRepository.save(commande);
 
         commandeProduitRepository.save(new CommandeProduit(commande, produit, 1));
 
+        flushAndClear();
+
         Commande fetchedCommande = commandeRepository.findByIdWithCommandeProduits(50L).orElse(null);
 
         assertNotNull(fetchedCommande);
-        // assertNotNull(fetchedCommande.getCommandeProduits());
+        assertNotNull(fetchedCommande.getCommandeProduits());
     }
 }

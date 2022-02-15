@@ -7,9 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -43,6 +46,10 @@ public class Terrain {
 	@Column(name = "typeDeSol", length = 20)
 	private TypeDeSol typeDeSol;
 	
+	@ManyToOne
+	@JoinColumn(name = "proprietaire", foreignKey = @ForeignKey(name = "utilisateur_terrain_fk"))
+	private Utilisateur utilisateur;
+	
 	@OneToMany(mappedBy = "terrain")
 	private List<Plante> plantes;
 	
@@ -51,18 +58,18 @@ public class Terrain {
 		
 	}
 	
-
 	public Terrain(double surface, String localisation, double dureeExpoSoleil, double decoupageTerrainLongeur,
-			double decoupageTerrainLargeur, TypeDeSol typeDeSol, List<Plante> plantes) {
+			double decoupageTerrainLargeur, TypeDeSol typeDeSol, Utilisateur utilisateur, List<Plante> plantes) {
+		super();
 		this.surface = surface;
 		this.localisation = localisation;
 		this.dureeExpoSoleil = dureeExpoSoleil;
 		this.decoupageTerrainLongeur = decoupageTerrainLongeur;
 		this.decoupageTerrainLargeur = decoupageTerrainLargeur;
 		this.typeDeSol = typeDeSol;
+		this.utilisateur = utilisateur;
 		this.plantes = plantes;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -126,6 +133,14 @@ public class Terrain {
 
 	public void setPlantes(List<Plante> plantes) {
 		this.plantes = plantes;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	@Override

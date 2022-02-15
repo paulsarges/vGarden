@@ -14,6 +14,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.Properties;
 
 @Configuration
@@ -58,12 +61,17 @@ public class AppConfig {
 
 	@Bean
 	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-		JpaTransactionManager transactionManager = new JpaTransactionManager(entityManagerFactory);
-		return transactionManager;
+		return new JpaTransactionManager(entityManagerFactory);
 	}
 
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	@Bean
+	public Validator validator() {
+		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+		return validatorFactory.getValidator();
 	}
 }
