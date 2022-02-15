@@ -22,7 +22,7 @@ public class Commande {
 	@ManyToOne
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"), nullable = false)
 	private Utilisateur utilisateur;
-	
+
 	@Column(name = "commande_date_creation", nullable = false)
 	private LocalDateTime dateCreation;
 
@@ -36,7 +36,7 @@ public class Commande {
 	 * Constructeur vide par défaut.
 	 */
 	public Commande() {
-
+		this.dateCreation = LocalDateTime.now();
 	}
 
 	/**
