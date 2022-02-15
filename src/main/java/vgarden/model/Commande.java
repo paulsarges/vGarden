@@ -1,8 +1,10 @@
 package vgarden.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.*;
+import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 /*@NamedEntityGraph(name = "Commande.CommandeProduits",
@@ -17,11 +19,12 @@ public class Commande {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"))
+	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"), nullable = false)
 	private Utilisateur utilisateur;
 
+	@NotEmpty
 	@Column(name = "commande_date_creation", nullable = false)
-	private LocalDate dateCreation;
+	private LocalDateTime dateCreation;
 
 	@OneToMany(mappedBy = "id.commande")
 	private Set<CommandeProduit> commandeProduits;
@@ -39,7 +42,7 @@ public class Commande {
 	 */
 	public Commande(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
-		this.dateCreation = LocalDate.now();
+		this.dateCreation = LocalDateTime.now();
 	}
 
 	/**
@@ -70,11 +73,11 @@ public class Commande {
 	 * La date de la création de la commande.
 	 * @return - Date de création de la commande
 	 */
-	public LocalDate getDateCreation() {
+	public LocalDateTime getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(LocalDate dateCreation) {
+	public void setDateCreation(LocalDateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 
