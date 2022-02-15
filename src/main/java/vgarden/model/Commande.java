@@ -1,5 +1,9 @@
 package vgarden.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import vgarden.model.views.CommandeViews;
+import vgarden.model.views.Views;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -16,17 +20,21 @@ public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCommande")
 	@Column(name = "commande_id")
+	@JsonView(Views.Common.class)
 	private Long id;
 
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"), nullable = false)
+	@JsonView(CommandeViews.WithUtilisateur.class)
 	private Utilisateur utilisateur;
 
 	@Column(name = "commande_date_creation", nullable = false)
+	@JsonView(Views.Common.class)
 	private LocalDateTime dateCreation;
 
 	@OneToMany(mappedBy = "id.commande", cascade = CascadeType.REMOVE)
+	@JsonView(CommandeViews.WithCommandeProduits.class)
 	private Set<CommandeProduit> commandeProduits;
 
 	@Version

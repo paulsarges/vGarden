@@ -1,5 +1,8 @@
 package vgarden.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import vgarden.model.views.Views;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -12,10 +15,12 @@ import java.util.Objects;
 public class CommandeProduit {
 
 	@EmbeddedId
+	@JsonView(Views.Common.class)
 	private CommandeProduitKey id;
 
 	@Min(1)
 	@Column(name = "commande_produit_quantite", nullable = false)
+	@JsonView(Views.Common.class)
 	private Integer quantite;
 
 	public CommandeProduit() {

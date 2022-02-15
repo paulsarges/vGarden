@@ -1,5 +1,8 @@
 package vgarden.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import vgarden.model.views.Views;
+
 import javax.persistence.Embeddable;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
@@ -16,6 +19,7 @@ public class CommandeProduitKey implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "commande_produit_produit_id", foreignKey = @ForeignKey(name = "commande_produit_produit_id_fk"))
+    @JsonView(Views.Common.class)
     private Produit produit;
 
     public CommandeProduitKey() {
