@@ -1,7 +1,7 @@
 package vgarden.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
@@ -18,16 +18,19 @@ public class Commande {
 	@Column(name = "commande_id")
 	private Long id;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"), nullable = false)
 	private Utilisateur utilisateur;
-
-	@NotEmpty
+	
 	@Column(name = "commande_date_creation", nullable = false)
 	private LocalDateTime dateCreation;
 
-	@OneToMany(mappedBy = "id.commande")
+	@OneToMany(mappedBy = "id.commande", cascade = CascadeType.REMOVE)
 	private Set<CommandeProduit> commandeProduits;
+
+	@Version
+	private int version;
 
 	/**
 	 * Constructeur vide par défaut.
@@ -106,6 +109,14 @@ public class Commande {
 				.sum();
 	}
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -118,4 +129,5 @@ public class Commande {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 }
