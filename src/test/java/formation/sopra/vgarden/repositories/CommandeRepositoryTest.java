@@ -75,12 +75,9 @@ class CommandeRepositoryTest {
         produitRepository.save(produit);
 
         Commande commande = new Commande(particulier);
+        commande.addProduit(produit, 1);
 
         Commande savedCommande = commandeRepository.save(commande);
-
-        commandeProduitRepository.save(new CommandeProduit(commande, produit, 1));
-
-        flushAndClear();
 
         Commande fetchedCommande = commandeRepository.findByIdWithCommandeProduits(savedCommande.getId()).orElse(null);
 

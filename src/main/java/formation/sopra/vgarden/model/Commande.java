@@ -7,8 +7,9 @@ import formation.sopra.vgarden.model.views.Views;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 /*@NamedEntityGraph(name = "Commande.CommandeProduits",
@@ -35,7 +36,7 @@ public class Commande {
 
 	@OneToMany(mappedBy = "id.commande", cascade = CascadeType.REMOVE)
 	@JsonView(CommandeViews.WithCommandeProduits.class)
-	private Set<CommandeProduit> commandeProduits;
+	private List<CommandeProduit> commandeProduits = new ArrayList<>();
 
 	@Version
 	private int version;
@@ -96,11 +97,11 @@ public class Commande {
 	 * Récupère les produits associés à la commande.
 	 * @return Produits associés à la commande.
 	 */
-	public Set<CommandeProduit> getCommandeProduits() {
+	public List<CommandeProduit> getCommandeProduits() {
 		return commandeProduits;
 	}
 
-	public void setCommandeProduits(Set<CommandeProduit> commandeProduits) {
+	public void setCommandeProduits(List<CommandeProduit> commandeProduits) {
 		this.commandeProduits = commandeProduits;
 	}
 
@@ -115,6 +116,10 @@ public class Commande {
 				.stream()
 				.mapToDouble(commandeProduit -> commandeProduit.getId().getProduit().getPrix() * commandeProduit.getQuantite())
 				.sum();
+	}
+
+	public void addProduit(Produit produit, int quantite) {
+		commandeProduits.add(new CommandeProduit(this, produit, quantite));
 	}
 
 	public int getVersion() {
