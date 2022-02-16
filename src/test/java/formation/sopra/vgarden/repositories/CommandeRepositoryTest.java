@@ -1,7 +1,6 @@
 package formation.sopra.vgarden.repositories;
 
 import formation.sopra.vgarden.model.*;
-import formation.sopra.vgarden.repositories.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -77,13 +76,13 @@ class CommandeRepositoryTest {
 
         Commande commande = new Commande(particulier);
 
-        commandeRepository.save(commande);
+        Commande savedCommande = commandeRepository.save(commande);
 
         commandeProduitRepository.save(new CommandeProduit(commande, produit, 1));
 
         flushAndClear();
 
-        Commande fetchedCommande = commandeRepository.findByIdWithCommandeProduits(50L).orElse(null);
+        Commande fetchedCommande = commandeRepository.findByIdWithCommandeProduits(savedCommande.getId()).orElse(null);
 
         assertNotNull(fetchedCommande);
         assertNotNull(fetchedCommande.getCommandeProduits());
