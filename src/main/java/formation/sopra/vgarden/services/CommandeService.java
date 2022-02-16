@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class CommandeService {
 
-    private static Logger logger = LoggerFactory.getLogger(CommandeService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommandeService.class);
 
     private final Validator validator;
     private final CommandeRepository commandeRepository;
