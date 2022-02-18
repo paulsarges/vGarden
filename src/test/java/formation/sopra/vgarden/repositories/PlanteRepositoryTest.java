@@ -59,11 +59,11 @@ class PlanteRepositoryTest {
 		System.out.println("--------------------");
 		System.out.println(plante);
 		System.out.println("--------------------");
-		System.out.println(utilisateur);
-		compteRepo.save(utilisateur);
-
-		planteRepo.save(plante);
-		terrainRepo.save(terrain);
+//		System.out.println(utilisateur);
+//		compteRepo.save(utilisateur);
+//
+//		planteRepo.save(plante);
+//		terrainRepo.save(terrain);
 
 	}
 

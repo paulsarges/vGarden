@@ -1,48 +1,53 @@
 package formation.sopra.vgarden.model;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotEmpty;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 @Entity
 @Table(name = "comptes")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "compte", length=50)
 @SequenceGenerator(name = "seqCompte", sequenceName = "seq_compte", initialValue = 100, allocationSize = 1)
 @NamedQueries({ @NamedQuery(query = "select c from Compte c", name = "Employe.findAll"),
 	@NamedQuery(query = "select c from Compte c where c.login=:login and c.password=:password", name = "Employe.findByCompteByLoginAndPassword")})
-public abstract class Compte implements UserDetails{
+public class Compte implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCompte")
 	@Column(name = "id")
+	@JsonView(Views.Common.class)
 	protected Long id;
-	@NotEmpty
+	@NotNull
 	@Pattern(regexp = "^[a-zA-Z]((_)?([a-zA-Z0-9]{1,}))*$")
 	@Column(name = "login", unique = true, length = 50)
-	@NotEmpty
+	@NotNull
 	protected String login;
 	@Column(name = "password", length = 150)
 	protected String password;
@@ -50,6 +55,11 @@ public abstract class Compte implements UserDetails{
 	@CollectionTable(name = "users_roles")
 	protected Role role;
 	private boolean enable = true;
+	@OneToOne(mappedBy = "compte")
+	@JsonView(Views.Common.class)
+	private Utilisateur utilisateur;
+	@Version
+	private int version;
 
 	public Compte() {
 		super();
@@ -87,14 +97,25 @@ public abstract class Compte implements UserDetails{
 		this.login = login;
 	}
 
-	public String getPassword() {
-		return password;
-	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
+	
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+
+
 	public boolean isEnable() {
 		return enable;
 	}
@@ -104,7 +125,41 @@ public abstract class Compte implements UserDetails{
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return new HashSet<GrantedAuthority>(Arrays.asList(new SimpleGrantedAuthority(this.role.toString())));
+	}
 
+	@Override
+	public String getUsername() {
+		return this.login;
+	}
+	
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 
 	@Override
