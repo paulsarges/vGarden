@@ -1,5 +1,6 @@
 package formation.sopra.vgarden.services;
 
+import formation.sopra.vgarden.repositories.CommandeProduitRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,12 @@ public class CommandeService {
 
     private final Validator validator;
     private final CommandeRepository commandeRepository;
+    private final CommandeProduitRepository commandeProduitRepository;
 
-    public CommandeService(Validator validator, CommandeRepository commandeRepository) {
+    public CommandeService(Validator validator, CommandeRepository commandeRepository, CommandeProduitRepository commandeProduitRepository) {
         this.validator = validator;
         this.commandeRepository = commandeRepository;
+        this.commandeProduitRepository = commandeProduitRepository;
     }
 
     public List<Commande> getAll() {
@@ -49,7 +52,12 @@ public class CommandeService {
         if (commande.getId() == null) {
             Commande newCommande = commandeRepository.save(commande);
 
-            logger.debug("Created new commande {}", newCommande.getId());
+            if(!commande.getCommandeProduits().isEmpty()) {
+                commande.getCommandeProduits().forEach(commandeProduit -> commandeProduit.getId().setCommande(newCommande));
+                commandeProduitRepository.saveAll(commande.getCommandeProduits());
+            }
+
+            logger.debug("Created new commande [{}] for user [{}]", newCommande.getId(), newCommande.getUtilisateur().getId());
 
             return newCommande;
         } else {
