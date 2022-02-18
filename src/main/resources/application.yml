@@ -1,4 +1,5 @@
 spring:
+  main:    allow-circular-references: true
   jpa:
     open-in-view: false
     properties:

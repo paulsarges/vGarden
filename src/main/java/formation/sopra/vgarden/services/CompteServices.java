@@ -4,44 +4,29 @@ import formation.sopra.vgarden.exceptions.CompteException;
 import formation.sopra.vgarden.model.Compte;
 import formation.sopra.vgarden.repositories.CompteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CompteServices {
+public class CompteServices implements UserDetailsService{
 	@Autowired
-	CompteRepository compteRepo;
+	private CompteRepository compteRepo;
+	@Autowired
+	private PasswordEncoder encoder;
 
 
-	public Compte createOrUpdate(Compte c) {
-		if (c == null) {
-			throw new CompteException("Compte incorrecte");
-		}
-		if(c.getId() == null) {
-			checkdata(c);
-			return compteRepo.save(c);
-		}
-		else {
-			Compte compteBase = compteRepo.getById(c.getId());
-			if (compteBase.getLogin() == c.getLogin() && (compteBase.getPassword() != c.getPassword())) {
-				checkdata(compteBase);
-				compteBase.setPassword(c.getPassword());
-			}
-			return compteRepo.save(compteBase);
-		}
-
+	public Compte save(Compte c) {
+		c.setPassword(encoder.encode(c.getPassword()));
+		return compteRepo.save(c);
 	}
 
-	public void checkdata(Compte c) {
-		if (c.getLogin() == null ||c.getLogin().isEmpty()||c.getPassword() == null ||c.getPassword().isEmpty()) {
-			throw new CompteException("Donn�es incorrectes");
-		}
-	}
 
-	public Compte checkLogin(Compte c) {
-		checkdata(c);
-		String login = c.getLogin();
-		String password = c.getPassword();
-		Compte compteBase = compteRepo.findByloginAndPassWord(login, password).orElseThrow(CompteException::new);
-		return compteBase;
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return compteRepo.findBylogin(username).orElseThrow(() ->
+				new CompteException("compte inexistant"));
 	}
 }
