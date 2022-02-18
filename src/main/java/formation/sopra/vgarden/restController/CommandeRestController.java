@@ -1,4 +1,4 @@
-package formation.sopra.vgarden.controllers;
+package formation.sopra.vgarden.restController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import formation.sopra.vgarden.exceptions.CommandeException;
@@ -15,11 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/commande")
-public class CommandeController {
+public class CommandeRestController {
 
     private final CommandeService commandeService;
 
-    public CommandeController(CommandeService commandeService) {
+    public CommandeRestController(CommandeService commandeService) {
         this.commandeService = commandeService;
     }
 
