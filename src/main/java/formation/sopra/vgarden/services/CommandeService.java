@@ -80,9 +80,7 @@ public class CommandeService {
             throw new CommandeException();
         }
 
-        Commande databaseCommande = getById(commande.getId());
-
-        commandeRepository.delete(databaseCommande);
+        commandeRepository.delete(commande);
     }
 
     public void deleteById(Long id) {
