@@ -53,10 +53,7 @@ public class CommandeService {
             Commande newCommande = commandeRepository.save(commande);
 
             if(!commande.getCommandeProduits().isEmpty()) {
-                commande.getCommandeProduits().forEach(commandeProduit -> {
-                    commandeProduit.getId().setCommande(newCommande);
-                });
-
+                commande.getCommandeProduits().forEach(commandeProduit -> commandeProduit.getId().setCommande(newCommande));
                 commandeProduitRepository.saveAll(commande.getCommandeProduits());
             }
 
