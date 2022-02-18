@@ -120,15 +120,6 @@ public class Commande {
 				.sum();
 	}
 
-	/**
-	 * Permet d'ajout un produit à la commande
-	 * @param produit - Le produit à ajouter
-	 * @param quantite - La quantité du produit
-	 */
-	public void addProduit(Produit produit, int quantite) {
-		commandeProduits.add(new CommandeProduit(this, produit, quantite));
-	}
-
 	public int getVersion() {
 		return version;
 	}
