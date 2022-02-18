@@ -16,3 +16,6 @@ logging:
     formation:
       sopra:
         vgarden: DEBUG
+server:
+  servlet:
+    context-path: /api

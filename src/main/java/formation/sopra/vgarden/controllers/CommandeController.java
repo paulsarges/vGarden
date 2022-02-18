@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/commande")
+@RequestMapping("/commande")
 public class CommandeController {
 
     private final CommandeService commandeService;
