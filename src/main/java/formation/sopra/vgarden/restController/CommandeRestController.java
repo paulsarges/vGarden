@@ -45,4 +45,10 @@ public class CommandeRestController {
 
         return commandeService.createOrUpdate(commande);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        commandeService.deleteById(id);
+    }
 }
