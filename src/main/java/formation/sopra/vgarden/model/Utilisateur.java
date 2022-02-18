@@ -1,20 +1,16 @@
 package formation.sopra.vgarden.model;
 
 import javax.persistence.*;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
-@DiscriminatorValue(value = "utilisateur")
+@Table(name = "utilisateur")
+@SequenceGenerator(name = "seqCompte", sequenceName = "seq_utilisateur", initialValue = 100, allocationSize = 1)
+@AttributeOverrides({@AttributeOverride(name = "id", column = @Column(name = "utilsateur_id")),
+					@AttributeOverride(name = "login", column = @Column(name = "utilsateur_login", length = 50, nullable = false)),
+					@AttributeOverride(name = "password", column = @Column(name = "utilsateur_password", length = 50, nullable = false))
+})
 public class Utilisateur extends Compte{
 
 	protected double taxe;
@@ -39,7 +35,6 @@ public class Utilisateur extends Compte{
 
 	public Utilisateur() {
 		super();
-		this.role = Role.ROLE_USER;
 	}
 
 	public double getTaxe() {
@@ -107,44 +102,7 @@ public class Utilisateur extends Compte{
 	public void setTypeCompte(TypeCompte typeCompte) {
 		this.typeCompte = typeCompte;
 	}
-	
 
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return new HashSet<GrantedAuthority>(Arrays.asList(new SimpleGrantedAuthority(this.role.toString())));
-	}
-
-	@Override
-	public String getUsername() {
-		return this.login;
-	}
-	
-	@Override
-	public String getPassword() {
-		return password;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
-	
 	public void acheter() {
 
 	}
