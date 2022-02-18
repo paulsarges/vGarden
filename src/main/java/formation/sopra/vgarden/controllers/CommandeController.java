@@ -30,7 +30,7 @@ public class CommandeController {
     }
 
     @GetMapping("{commandeId}/produits")
-    @JsonView(CommandeViews.WithCommandeProduits.class)
+    @JsonView(Views.CommandeWithCommandeProduits.class)
     public List<CommandeProduit> getCommandeProduits(@PathVariable Long commandeId) {
         return commandeService.getByIdWithCommandeProduits(commandeId).getCommandeProduits();
     }
