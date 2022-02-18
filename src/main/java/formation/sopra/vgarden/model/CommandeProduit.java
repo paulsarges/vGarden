@@ -1,7 +1,6 @@
 package formation.sopra.vgarden.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import formation.sopra.vgarden.model.views.Views;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;

@@ -1,8 +1,6 @@
 package formation.sopra.vgarden.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import formation.sopra.vgarden.model.views.CommandeViews;
-import formation.sopra.vgarden.model.views.Views;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,7 +25,7 @@ public class Commande {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_compte_id_fk"), nullable = false)
-	@JsonView(CommandeViews.WithUtilisateur.class)
+	@JsonView(Views.CommandeWithUtilisateur.class)
 	private Utilisateur utilisateur;
 
 	@Column(name = "commande_date_creation", nullable = false)
@@ -35,7 +33,7 @@ public class Commande {
 	private LocalDateTime dateCreation;
 
 	@OneToMany(mappedBy = "id.commande", cascade = CascadeType.REMOVE)
-	@JsonView(CommandeViews.WithCommandeProduits.class)
+	@JsonView(Views.CommandeWithCommandeProduits.class)
 	private List<CommandeProduit> commandeProduits = new ArrayList<>();
 
 	@Version
