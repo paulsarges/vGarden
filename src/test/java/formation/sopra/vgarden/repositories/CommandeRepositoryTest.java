@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -35,8 +37,8 @@ class CommandeRepositoryTest {
     @Transactional
     void findByIdAndFetchCommandeProduits() {
         Utilisateur particulier = new Utilisateur();
-        particulier.setLogin("test");
-        particulier.setPassword("test");
+        particulier.setLogin("test1");
+        particulier.setPassword("test1");
         particulier.setTypeCompte(TypeCompte.Particulier);
 
         Utilisateur pro = new Utilisateur();
@@ -65,7 +67,11 @@ class CommandeRepositoryTest {
         produitRepository.save(produit);
 
         Commande commande = new Commande(particulier);
-        commande.addProduit(produit, 1);
+
+        List<CommandeProduit> commandeProduits = new ArrayList<>();
+        commandeProduits.add(new CommandeProduit(commande, produit, 1));
+
+        commande.setCommandeProduits(commandeProduits);
 
         Commande savedCommande = commandeRepository.save(commande);
 
