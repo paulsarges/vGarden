@@ -3,7 +3,6 @@ package formation.sopra.vgarden.restController;
 import com.fasterxml.jackson.annotation.JsonView;
 import formation.sopra.vgarden.exceptions.CommandeException;
 import formation.sopra.vgarden.model.Commande;
-import formation.sopra.vgarden.model.CommandeProduit;
 import formation.sopra.vgarden.model.Views;
 import formation.sopra.vgarden.services.CommandeService;
 import org.springframework.http.HttpStatus;
@@ -29,10 +28,16 @@ public class CommandeRestController {
         return commandeService.getAll();
     }
 
-    @GetMapping("{commandeId}/produits")
+    @GetMapping("/{commandeId}")
+    @JsonView(Views.Common.class)
+    public Commande getById(@PathVariable Long commandeId) {
+        return commandeService.getById(commandeId);
+    }
+
+    @GetMapping("/{commandeId}/produits")
     @JsonView(Views.CommandeWithCommandeProduits.class)
-    public List<CommandeProduit> getCommandeProduits(@PathVariable Long commandeId) {
-        return commandeService.getByIdWithCommandeProduits(commandeId).getCommandeProduits();
+    public Commande getByIdWithCommandeProduits(@PathVariable Long commandeId) {
+        return commandeService.getByIdWithCommandeProduits(commandeId);
     }
 
     @PostMapping("")
