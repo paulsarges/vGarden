@@ -1,11 +1,10 @@
 package formation.sopra.vgarden.model;
 
+import javax.persistence.*;
 import java.time.Month;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-
-import javax.persistence.*;
 
 
 @Entity
@@ -16,64 +15,64 @@ public class FichePlante {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFichePlante")
 	@Column(name = "id_fiche_plante")
 	private Long id;
-	
+
 	@Column(name = "nom_fiche_plante", length = 50, nullable = false)
 	private String nom;
-	
-	@Column(name = "eau_fiche_maladie", nullable = false)
+
+	@Column(name = "eau_fiche_plante", nullable = false)
 	private String eau;
-	
-	@Column(name = "exposition_fiche_maladie", nullable = false)
+
+	@Column(name = "exposition_fiche_plante", nullable = false)
 	private String exposition;
-	
-	@Column(name = "exposition_fiche_maladie", nullable = false)
+
+	@Column(name = "espacement_fiche_plante", nullable = false)
 	private String espacement;
-	
-	@Column(name = "conservation_graine_fiche_maladie", nullable = false)
+
+	@Column(name = "conservation_graine_fiche_plante", nullable = false)
 	private String dureeConservationGraine;
-	
-	
+
+
 	@Enumerated(EnumType.STRING)
 	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "calendrier_semer")
 	private Set<Month> calendrierSemer;
-	
+
 	@Enumerated(EnumType.STRING)
 	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "calendrier_planter")
 	private Set<Month> calendrierPlanter;
-	
+
 	@Enumerated(EnumType.STRING)
 	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "calendrier_recolter")
 	private Set<Month> calendrierRecolter;
-	
+
 	@OneToMany(mappedBy = "bonsCopains")
 	private List<FichePlante> bonsCopains;
-	
+
 	@OneToMany(mappedBy = "mauvaisCopains")
 	private List<FichePlante> mauvaisCopains;
-	
-	@ManyToMany(mappedBy = "maladiesDeLaPlante")
+
+	@ManyToMany(mappedBy = "plantes")
 	private List<FicheMaladie> maladiesPlante;
-	
-	@ManyToMany(mappedBy = "ravageursDeLaPlante")
+
+	@ManyToMany(mappedBy = "plantes")
 	private List<FicheRavageur> ravageursPlante;
-	
+
 	@Column(name = "methodeSemer_fiche_maladie", nullable = true)
 	private String methodeSemer;
-	
+
 	@Column(name = "methodePlanter_fiche_maladie", nullable = true)
 	private String methodePlanter;
-	
+
 	@Column(name = "methodeEntretien_fiche_maladie", nullable = true)
 	private String methodeEntretien;
-	
+
 	@Column(name = "methodeRecolte_fiche_maladie", nullable = true)
 	private String methodeRecolte;
-	
+
 	public FichePlante() {
-		
+
 	}
 
 	public FichePlante(String nom, String eau, String exposition, String espacement, String dureeConservationGraine,
@@ -81,7 +80,7 @@ public class FichePlante {
 			List<FichePlante> bonsCopains, List<FichePlante> mauvaisCopains, List<FicheMaladie> maladiesPlante,
 			List<FicheRavageur> ravageursPlante, String methodeSemer, String methodePlanter, String methodeEntretien,
 			String methodeRecolte) {
-	
+
 		this.nom = nom;
 		this.eau = eau;
 		this.exposition = exposition;
@@ -253,6 +252,6 @@ public class FichePlante {
 		FichePlante other = (FichePlante) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
+
 }
