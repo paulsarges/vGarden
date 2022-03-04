@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
-    //@EntityGraph(value = "Commande.CommandeProduits", type = EntityGraph.EntityGraphType.FETCH)
     @Query("SELECT c from Commande c left join fetch c.commandeProduits where c.id=:id")
     Optional<Commande> findByIdWithCommandeProduits(@Param("id") Long id);
 

@@ -3,14 +3,13 @@ package formation.sopra.vgarden.model;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-/*@NamedEntityGraph(name = "Commande.CommandeProduits",
-		attributeNodes = @NamedAttributeNode("commandeProduits"))*/
 @Table(name = "commande")
 @SequenceGenerator(name = "seqCommande", sequenceName = "seq_commande", initialValue = 50, allocationSize = 1)
 public class Commande {
@@ -22,6 +21,7 @@ public class Commande {
 	private Long id;
 
 	@ManyToOne
+	@NotNull
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_utilisateur_id_fk"))
 	@JsonView(Views.CommandeWithUtilisateur.class)
 	private Utilisateur utilisateur;
