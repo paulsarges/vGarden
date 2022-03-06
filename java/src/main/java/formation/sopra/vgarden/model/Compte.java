@@ -28,6 +28,7 @@ import javax.validation.constraints.Pattern;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -37,6 +38,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @SequenceGenerator(name = "seqCompte", sequenceName = "seq_compte", initialValue = 100, allocationSize = 1)
 @NamedQueries({ @NamedQuery(query = "select c from Compte c", name = "Employe.findAll"),
 	@NamedQuery(query = "select c from Compte c where c.login=:login and c.password=:password", name = "Employe.findByCompteByLoginAndPassword")})
+@CrossOrigin
 public class Compte implements UserDetails{
 
 	@Id

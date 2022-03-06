@@ -50,6 +50,11 @@ public class CompteServices implements UserDetailsService{
 		return compteRepo.findById(id).orElseThrow(() ->
 				new CompteException("Compte inexistant par find by id"));
 	}
+	
+	public Compte getByLogin(String login) {
+		return compteRepo.findBylogin(login).orElseThrow(() ->
+			new CompteException("Compte inexistant par find by login"));
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
