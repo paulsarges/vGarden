@@ -1,5 +1,9 @@
 package formation.sopra.vgarden.model;
 
+import javax.persistence.*;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -10,6 +14,7 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue(value = "utilisateur")
 @SequenceGenerator(name = "utilisateurSeq", sequenceName = "utilisateur_seq", allocationSize = 1, initialValue = 100)
+@CrossOrigin(origins = "http://localhost:4200")
 public class Utilisateur{
 	@Id
 	@GeneratedValue(generator = "utilisateurSeq", strategy = GenerationType.SEQUENCE)

@@ -1,14 +1,20 @@
 package formation.sopra.vgarden.model;
 
 import javax.persistence.Embeddable;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.util.Objects;
 
 @Embeddable
 public class Adresse {
-
+	@JsonView(Views.Common.class)
 	private String numero;
+	@JsonView(Views.Common.class)
 	private String voie;
+	@JsonView(Views.Common.class)
 	private String ville;
+	@JsonView(Views.Common.class)
 	private String cp;
 
 	public Adresse() {
