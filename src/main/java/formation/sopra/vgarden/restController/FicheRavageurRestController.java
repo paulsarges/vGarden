@@ -16,7 +16,7 @@ import formation.sopra.vgarden.model.Views;
 import formation.sopra.vgarden.services.FicheRavageurService;
 
 @RestController
-@RequestMapping("/fiches_ravageurs")
+@RequestMapping("/fiches_ravageur")
 public class FicheRavageurRestController {
 
     private final FicheRavageurService ficheRavageurService;
