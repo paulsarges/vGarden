@@ -1,5 +1,6 @@
 package formation.sopra.vgarden.services;
 
+import formation.sopra.vgarden.model.Utilisateur;
 import formation.sopra.vgarden.repositories.CommandeProduitRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,10 @@ public class CommandeService {
         return commandeRepository.findByIdWithCommandeProduits(id).orElseThrow(() -> {
             throw new CommandeException("Commande inexistante");
         });
+    }
+
+    public List<Commande> getByUtilisateurWithCommandeProduits(Utilisateur utilisateur) {
+        return commandeRepository.findByUtilisateurWithCommandeProduits(utilisateur);
     }
 
     public Commande createOrUpdate(Commande commande) {
