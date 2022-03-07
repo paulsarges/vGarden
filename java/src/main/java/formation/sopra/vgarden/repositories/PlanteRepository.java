@@ -1,5 +1,6 @@
 package formation.sopra.vgarden.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import formation.sopra.vgarden.model.Plante;
@@ -9,7 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface PlanteRepository extends JpaRepository<Plante, Long> {
 
-	Optional<Plante> findByTerrain(@Param("terrain") Terrain terrain);
-
+	List<Plante> findByTerrain(@Param("terrain") Terrain terrain);
+	
+	
 
 	}
