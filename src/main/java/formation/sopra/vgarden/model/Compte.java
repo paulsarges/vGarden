@@ -1,35 +1,17 @@
 package formation.sopra.vgarden.model;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
-
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
 
 
 @Entity
@@ -55,7 +37,7 @@ public class Compte implements UserDetails{
 	@CollectionTable(name = "users_roles")
 	protected Role role;
 	private boolean enable = true;
-	@OneToOne(mappedBy = "compte")
+	@OneToOne(mappedBy = "compte", cascade = CascadeType.PERSIST)
 	@JsonView(Views.Common.class)
 	private Utilisateur utilisateur;
 	@Version
@@ -78,8 +60,8 @@ public class Compte implements UserDetails{
 	public String getLogin() {
 		return login;
 	}
-	
-	
+
+
 
 	public Role getRole() {
 		return role;
@@ -101,9 +83,9 @@ public class Compte implements UserDetails{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
+
+
+
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
@@ -125,7 +107,7 @@ public class Compte implements UserDetails{
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return new HashSet<GrantedAuthority>(Arrays.asList(new SimpleGrantedAuthority(this.role.toString())));
@@ -135,7 +117,7 @@ public class Compte implements UserDetails{
 	public String getUsername() {
 		return this.login;
 	}
-	
+
 	@Override
 	public String getPassword() {
 		return password;
@@ -180,5 +162,5 @@ public class Compte implements UserDetails{
 		Compte other = (Compte) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }
