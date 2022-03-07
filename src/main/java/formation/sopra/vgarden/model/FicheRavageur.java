@@ -23,11 +23,11 @@ public class FicheRavageur {
 	@Column(name = "solution", nullable = true)
 	private String solution;
 
-	//A MODIF
-	@ManyToMany
-	@JoinTable(name="ravageurs",joinColumns = @JoinColumn(name="fiches_ravageurs_id",foreignKey = @ForeignKey(name="fiches_ravageurs_id_fk")),
-	inverseJoinColumns = @JoinColumn(name="plantes_id",foreignKey = @ForeignKey(name="plantes_id_fk")))
-	private List<FichePlante> plantes;
+//	//A MODIF
+//	@ManyToMany
+//	@JoinTable(name="ravageurs",joinColumns = @JoinColumn(name="fiches_ravageurs_id",foreignKey = @ForeignKey(name="fiches_ravageurs_id_fk")),
+//	inverseJoinColumns = @JoinColumn(name="plantes_id",foreignKey = @ForeignKey(name="plantes_id_fk")))
+//	private List<FichePlante> plantes;
 
 	public FicheRavageur(String nom, String description, String solution) {
 		this.nom = nom;
@@ -72,13 +72,13 @@ public class FicheRavageur {
 		this.solution = solution;
 	}
 
-	public List<FichePlante> getPlantes() {
-		return plantes;
-	}
-
-	public void setPlantes(List<FichePlante> plantes) {
-		this.plantes = plantes;
-	}
+//	public List<FichePlante> getPlantes() {
+//		return plantes;
+//	}
+//
+//	public void setPlantes(List<FichePlante> plantes) {
+//		this.plantes = plantes;
+//	}
 
 	@Override
 	public int hashCode() {
