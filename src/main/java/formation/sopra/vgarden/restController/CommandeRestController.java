@@ -29,16 +29,16 @@ public class CommandeRestController {
     }
 
     @GetMapping("/{commandeId}")
-    @JsonView(Views.Common.class)
+    @JsonView(Views.CommandeWithCommandeProduits.class)
     public Commande getById(@PathVariable Long commandeId) {
-        return commandeService.getById(commandeId);
+        return commandeService.getByIdWithCommandeProduits(commandeId);
     }
 
-    @GetMapping("/{commandeId}/produits")
+    /*@GetMapping("/{commandeId}/produits")
     @JsonView(Views.CommandeWithCommandeProduits.class)
     public Commande getByIdWithCommandeProduits(@PathVariable Long commandeId) {
         return commandeService.getByIdWithCommandeProduits(commandeId);
-    }
+    }*/
 
     @PostMapping("")
     @JsonView(Views.Common.class)
