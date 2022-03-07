@@ -49,6 +49,11 @@ public class CompteServices implements UserDetailsService{
 	public Compte getByUtilisateur(Utilisateur u) {
 		return compteRepo.findByUtilisateur(u);
 	}
+	
+	public Compte getByLogin(String login) {
+		return compteRepo.findBylogin(login).orElseThrow(() ->
+				new CompteException("Compte inexistant par find by login"));
+	}
 
 	public Compte getById(Long id) {
 		return compteRepo.findById(id).orElseThrow(() ->

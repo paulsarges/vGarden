@@ -12,6 +12,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -22,6 +25,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new
+                UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
+    }
 
 	// gestion des regles sur les URL
 	@Override
@@ -36,12 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				.antMatchers(HttpMethod.POST).hasRole("ADMIN")
 //				.antMatchers(HttpMethod.PUT).hasRole("ADMIN")
 //				.antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-				.antMatchers("/**").authenticated()
-
-
-				.and()
-				.httpBasic();
-
+				.anyRequest().permitAll()
+				
+				
+			.and()
+			.httpBasic();
+		http.cors();
+		
 		// @formatter:on
 	}
 

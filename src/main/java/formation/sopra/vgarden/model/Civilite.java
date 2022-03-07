@@ -1,5 +1,15 @@
 package formation.sopra.vgarden.model;
 
 public enum Civilite {
-	M, MME, MLLE, NB;
+	M("Monsieur"), MME("Madame"), MLLE("Mademoiselle");
+
+	private String titre;
+
+	private Civilite(String titre) {
+		this.titre = titre;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
 }

@@ -28,17 +28,18 @@ public class UtilisateurRestController {
 	UtilisateurServices utilisateurServices;
 	@Autowired
 	CompteServices compteServices;
-
+	
 	@GetMapping("/{login}")
 	@JsonView(Views.Common.class)
 	public Utilisateur getUtilisateur(@PathVariable String login) {
 		Compte c = compteServices.getByLogin(login);
 		return utilisateurServices.getByCompte(c);
 	}
-
-	@PutMapping("/modifier")
+	
+	@PutMapping("/{login}")
 	@JsonView(Views.Common.class)
-	public Utilisateur modifier(@AuthenticationPrincipal Compte c,@Valid @RequestBody Utilisateur u, BindingResult br) {
+	public Utilisateur modifier(@PathVariable String login,@Valid @RequestBody Utilisateur u, BindingResult br) {
+		Compte c = compteServices.getByLogin(login);
 		if (br.hasErrors()) {
 			throw new UtilisateurException("Données incorrectes");
 		}
