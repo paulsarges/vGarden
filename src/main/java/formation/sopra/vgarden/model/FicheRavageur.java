@@ -1,19 +1,8 @@
 package formation.sopra.vgarden.model;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 
 @Entity
@@ -24,26 +13,14 @@ public class FicheRavageur {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFicheRavageur")
 	@Column(name = "id")
 	private Long id;
-<<<<<<< HEAD:java/src/main/java/formation/sopra/vgarden/model/FicheRavageur.java
-	
+
 	@Column(name = "nom", length = 50, nullable = true)
 	private String nom;
-	
+
 	@Column(name = "description", nullable = true)
 	private String description;
-	
+
 	@Column(name = "solution", nullable = true)
-	private String solution;
-	
-=======
-
-	@Column(name = "nom_fiche_ravageur", length = 50, nullable = false)
-	private String nom;
-
-	@Column(name = "description_fiche_ravageur", nullable = false)
-	private String description;
-
-	@Column(name = "solution_fiche_ravageur", nullable = false)
 	private String solution;
 
 	//A MODIF
@@ -51,7 +28,6 @@ public class FicheRavageur {
 	@JoinTable(name="ravageurs",joinColumns = @JoinColumn(name="fiches_ravageurs_id",foreignKey = @ForeignKey(name="fiches_ravageurs_id_fk")),
 	inverseJoinColumns = @JoinColumn(name="plantes_id",foreignKey = @ForeignKey(name="plantes_id_fk")))
 	private List<FichePlante> plantes;
->>>>>>> main:src/main/java/formation/sopra/vgarden/model/FicheRavageur.java
 
 	public FicheRavageur(String nom, String description, String solution) {
 		this.nom = nom;
@@ -96,9 +72,6 @@ public class FicheRavageur {
 		this.solution = solution;
 	}
 
-<<<<<<< HEAD:java/src/main/java/formation/sopra/vgarden/model/FicheRavageur.java
-	
-=======
 	public List<FichePlante> getPlantes() {
 		return plantes;
 	}
@@ -107,9 +80,6 @@ public class FicheRavageur {
 		this.plantes = plantes;
 	}
 
-
-
->>>>>>> main:src/main/java/formation/sopra/vgarden/model/FicheRavageur.java
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
