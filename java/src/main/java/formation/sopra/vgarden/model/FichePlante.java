@@ -8,79 +8,99 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "fiche_plante")
-@SequenceGenerator(name = "seqFichePlante", sequenceName = "seq_fiche_plante", initialValue = 1, allocationSize = 1)
+@Table(name = "fiches_plante")
+@SequenceGenerator(name = "seqFichePlante", sequenceName = "seq_fiche_plante", initialValue = 53, allocationSize = 1)
 public class FichePlante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFichePlante")
-	@Column(name = "id_fiche_plante")
+	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "nom_fiche_plante", length = 50, nullable = false)
+	@Column(name = "nom", length = 50, nullable = true)
 	private String nom;
 
-	@Column(name = "eau_fiche_plante", nullable = false)
+	@Column(name = "eau", nullable = true)
 	private String eau;
 
-	@Column(name = "exposition_fiche_plante", nullable = false)
+	@Column(name = "soleil", nullable = true)
 	private String exposition;
 
-	@Column(name = "espacement_fiche_plante", nullable = false)
+	@Column(name = "espacement", nullable = true)
 	private String espacement;
 
-	@Column(name = "conservation_graine_fiche_plante", nullable = false)
+	@Column(name = "graine", nullable = true)
 	private String dureeConservationGraine;
 
+	@Column(name = "calendrier_semer", nullable = true)
+	private String calendrierSemer;
+	
+	@Column(name = "calendrier_planter", nullable = true)
+	private String calendrierPlanter;
+	
+	@Column(name = "calendrier_recolter", nullable = true)
+	private String calendrierRecolter;
+	
+	@Column(name = "bons_copains", nullable = true)
+	private String bonsCopains;
+	
+	@Column(name = "mauvais_copains", nullable = true)
+	private String mauvaisCopains;
+	
+	@Column(name = "maladies", nullable = true)
+	private String maladies;
+	
+	@Column(name = "ravageurs", nullable = true)
+	private String ravageurs;
+	
+//	@Enumerated(EnumType.STRING)
+//	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
+//	@CollectionTable(name = "calendrier_semer")
+//	private Set<Month> calendrierSemer;
+//
+//	@Enumerated(EnumType.STRING)
+//	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
+//	@CollectionTable(name = "calendrier_planter")
+//	private Set<Month> calendrierPlanter;
+//
+//	@Enumerated(EnumType.STRING)
+//	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
+//	@CollectionTable(name = "calendrier_recolter")
+//	private Set<Month> calendrierRecolter;
+//
+//	@OneToMany(mappedBy = "bonsCopains")
+//	private List<FichePlante> bonsCopains;
+//
+//	@OneToMany(mappedBy = "mauvaisCopains")
+//	private List<FichePlante> mauvaisCopains;
+//
+//	@ManyToMany(mappedBy = "plantes")
+//	private List<FicheMaladie> maladiesPlante;
+//
+//	@ManyToMany(mappedBy = "plantes")
+//	private List<FicheRavageur> ravageursPlante;
 
-	@Enumerated(EnumType.STRING)
-	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
-	@CollectionTable(name = "calendrier_semer")
-	private Set<Month> calendrierSemer;
-
-	@Enumerated(EnumType.STRING)
-	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
-	@CollectionTable(name = "calendrier_planter")
-	private Set<Month> calendrierPlanter;
-
-	@Enumerated(EnumType.STRING)
-	@ElementCollection(targetClass = Month.class, fetch = FetchType.EAGER)
-	@CollectionTable(name = "calendrier_recolter")
-	private Set<Month> calendrierRecolter;
-
-	@OneToMany(mappedBy = "bonsCopains")
-	private List<FichePlante> bonsCopains;
-
-	@OneToMany(mappedBy = "mauvaisCopains")
-	private List<FichePlante> mauvaisCopains;
-
-	@ManyToMany(mappedBy = "plantes")
-	private List<FicheMaladie> maladiesPlante;
-
-	@ManyToMany(mappedBy = "plantes")
-	private List<FicheRavageur> ravageursPlante;
-
-	@Column(name = "methodeSemer_fiche_maladie", nullable = true)
+	@Column(name = "methode_semer", nullable = true)
 	private String methodeSemer;
 
-	@Column(name = "methodePlanter_fiche_maladie", nullable = true)
+	@Column(name = "methode_planter", nullable = true)
 	private String methodePlanter;
 
-	@Column(name = "methodeEntretien_fiche_maladie", nullable = true)
+	@Column(name = "methode_entretien", nullable = true)
 	private String methodeEntretien;
 
-	@Column(name = "methodeRecolte_fiche_maladie", nullable = true)
+	@Column(name = "methode_recolte", nullable = true)
 	private String methodeRecolte;
 
 	public FichePlante() {
 
 	}
 
+	
 	public FichePlante(String nom, String eau, String exposition, String espacement, String dureeConservationGraine,
-			Set<Month> calendrierSemer, Set<Month> calendrierPlanter, Set<Month> calendrierRecolter,
-			List<FichePlante> bonsCopains, List<FichePlante> mauvaisCopains, List<FicheMaladie> maladiesPlante,
-			List<FicheRavageur> ravageursPlante, String methodeSemer, String methodePlanter, String methodeEntretien,
-			String methodeRecolte) {
-
+			String calendrierSemer, String calendrierPlanter, String calendrierRecolter, String bonsCopains,
+			String mauvaisCopains, String maladies, String ravageurs, String methodeSemer, String methodePlanter,
+			String methodeEntretien, String methodeRecolte) {
+		super();
 		this.nom = nom;
 		this.eau = eau;
 		this.exposition = exposition;
@@ -91,150 +111,186 @@ public class FichePlante {
 		this.calendrierRecolter = calendrierRecolter;
 		this.bonsCopains = bonsCopains;
 		this.mauvaisCopains = mauvaisCopains;
-		this.maladiesPlante = maladiesPlante;
-		this.ravageursPlante = ravageursPlante;
+		this.maladies = maladies;
+		this.ravageurs = ravageurs;
 		this.methodeSemer = methodeSemer;
 		this.methodePlanter = methodePlanter;
 		this.methodeEntretien = methodeEntretien;
 		this.methodeRecolte = methodeRecolte;
 	}
+
+
 
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getNom() {
 		return nom;
 	}
 
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
 
 	public String getEau() {
 		return eau;
 	}
 
+
 	public void setEau(String eau) {
 		this.eau = eau;
 	}
+
 
 	public String getExposition() {
 		return exposition;
 	}
 
+
 	public void setExposition(String exposition) {
 		this.exposition = exposition;
 	}
+
 
 	public String getEspacement() {
 		return espacement;
 	}
 
+
 	public void setEspacement(String espacement) {
 		this.espacement = espacement;
 	}
+
 
 	public String getDureeConservationGraine() {
 		return dureeConservationGraine;
 	}
 
+
 	public void setDureeConservationGraine(String dureeConservationGraine) {
 		this.dureeConservationGraine = dureeConservationGraine;
 	}
 
-	public Set<Month> getCalendrierSemer() {
+
+	public String getCalendrierSemer() {
 		return calendrierSemer;
 	}
 
-	public void setCalendrierSemer(Set<Month> calendrierSemer) {
+
+	public void setCalendrierSemer(String calendrierSemer) {
 		this.calendrierSemer = calendrierSemer;
 	}
 
-	public Set<Month> getCalendrierPlanter() {
+
+	public String getCalendrierPlanter() {
 		return calendrierPlanter;
 	}
 
-	public void setCalendrierPlanter(Set<Month> calendrierPlanter) {
+
+	public void setCalendrierPlanter(String calendrierPlanter) {
 		this.calendrierPlanter = calendrierPlanter;
 	}
 
-	public Set<Month> getCalendrierRecolter() {
+
+	public String getCalendrierRecolter() {
 		return calendrierRecolter;
 	}
 
-	public void setCalendrierRecolter(Set<Month> calendrierRecolter) {
+
+	public void setCalendrierRecolter(String calendrierRecolter) {
 		this.calendrierRecolter = calendrierRecolter;
 	}
 
-	public List<FichePlante> getBonsCopains() {
+
+	public String getBonsCopains() {
 		return bonsCopains;
 	}
 
-	public void setBonsCopains(List<FichePlante> bonsCopains) {
+
+	public void setBonsCopains(String bonsCopains) {
 		this.bonsCopains = bonsCopains;
 	}
 
-	public List<FichePlante> getMauvaisCopains() {
+
+	public String getMauvaisCopains() {
 		return mauvaisCopains;
 	}
 
-	public void setMauvaisCopains(List<FichePlante> mauvaisCopains) {
+
+	public void setMauvaisCopains(String mauvaisCopains) {
 		this.mauvaisCopains = mauvaisCopains;
 	}
 
-	public List<FicheMaladie> getMaladiesPlante() {
-		return maladiesPlante;
+
+	public String getMaladies() {
+		return maladies;
 	}
 
-	public void setMaladiesPlante(List<FicheMaladie> maladiesPlante) {
-		this.maladiesPlante = maladiesPlante;
+
+	public void setMaladies(String maladies) {
+		this.maladies = maladies;
 	}
 
-	public List<FicheRavageur> getRavageursPlante() {
-		return ravageursPlante;
+
+	public String getRavageurs() {
+		return ravageurs;
 	}
 
-	public void setRavageurs(List<FicheRavageur> ravageursPlante) {
-		this.ravageursPlante = ravageursPlante;
+
+	public void setRavageurs(String ravageurs) {
+		this.ravageurs = ravageurs;
 	}
+
 
 	public String getMethodeSemer() {
 		return methodeSemer;
 	}
 
+
 	public void setMethodeSemer(String methodeSemer) {
 		this.methodeSemer = methodeSemer;
 	}
+
 
 	public String getMethodePlanter() {
 		return methodePlanter;
 	}
 
+
 	public void setMethodePlanter(String methodePlanter) {
 		this.methodePlanter = methodePlanter;
 	}
+
 
 	public String getMethodeEntretien() {
 		return methodeEntretien;
 	}
 
+
 	public void setMethodeEntretien(String methodeEntretien) {
 		this.methodeEntretien = methodeEntretien;
 	}
+
 
 	public String getMethodeRecolte() {
 		return methodeRecolte;
 	}
 
+
 	public void setMethodeRecolte(String methodeRecolte) {
 		this.methodeRecolte = methodeRecolte;
 	}
+
 
 	@Override
 	public int hashCode() {
