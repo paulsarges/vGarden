@@ -27,7 +27,7 @@ import formation.sopra.vgarden.model.Views;
 import formation.sopra.vgarden.services.PlanteService;
 
 @RestController
-@RequestMapping("/api/plante")
+@RequestMapping("/plante")
 @CrossOrigin(origins = "*")
 public class PlanteRestController {
 
@@ -65,11 +65,17 @@ public class PlanteRestController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public Plante create(@Valid @RequestBody Plante plante, BindingResult br) {
 		if (br.hasErrors()) {
-			throw new PlanteException();
+			throw new PlanteException("Plante mal créée");
 		}
 		return planteService.createOrUpdate(plante);
 	}
-
+	//{"terrain":{"id":"2"},
+	//	"emplacementPlante": 
+	//	{"positionx":"2",
+	//	"positiony":"2"},
+	//	"typePlante": "Carotte"}
+	
+	
 	@PutMapping("/{id}")
 	@JsonView(Views.Common.class)
 	public Plante update(@PathVariable Long id, @Valid @RequestBody Plante plante, BindingResult br) {

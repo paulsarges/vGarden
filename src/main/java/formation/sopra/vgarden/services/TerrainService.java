@@ -46,7 +46,7 @@ public class TerrainService {
 
 	public Terrain createOrUpdate(Terrain terrain) {
 		check(terrain);
-		if (terrain.getId()==0L) {
+		if (terrain.getId()== null) {
 			return terrainRepository.save(terrain);
 		} else {
 			Terrain terrainEnBase = getById(terrain.getId());

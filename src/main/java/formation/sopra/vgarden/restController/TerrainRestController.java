@@ -27,7 +27,7 @@ import formation.sopra.vgarden.model.Views;
 import formation.sopra.vgarden.services.TerrainService;
 
 	@RestController
-	@RequestMapping("/api/terrain")
+	@RequestMapping("/terrain")
 	@CrossOrigin(origins = "*")
 	public class TerrainRestController {
 
@@ -69,11 +69,17 @@ import formation.sopra.vgarden.services.TerrainService;
 			}
 			return terrainService.createOrUpdate(terrain);
 		}
+		
+		// {
+		//	"surface":"20",
+		//	"localisation":"Montluçon",
+		//	"utilisateur": {"id":"100"}
+		//	}
 
 		@PutMapping("/{id}")
 		@JsonView(Views.Common.class)
 		public Terrain update(@PathVariable Long id, @Valid @RequestBody Terrain terrain, BindingResult br) {
-			if (terrain.getId() == 0L || id != terrain.getId() || br.hasErrors()) {
+			if (terrain.getId() == null|| id != terrain.getId() || br.hasErrors()) {
 				throw new TerrainException();
 			}
 			return terrainService.createOrUpdate(terrain);
