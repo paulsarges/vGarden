@@ -29,7 +29,7 @@ public class FicheMaladieRestController {
         return ficheMaladieService.getAll();
     }
 
-    @GetMapping("/{fiches_maladie_id}")
+    @GetMapping("/{ficheMaladieId}")
     @JsonView(Views.Common.class)
     public FicheMaladie getById(@PathVariable Long ficheMaladieId) {
         return ficheMaladieService.getById(ficheMaladieId);

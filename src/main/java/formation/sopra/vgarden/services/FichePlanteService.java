@@ -1,15 +1,14 @@
 package formation.sopra.vgarden.services;
 
-import java.util.List;
-
-import javax.validation.Validator;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import formation.sopra.vgarden.exceptions.FichePlanteException;
 import formation.sopra.vgarden.model.FichePlante;
 import formation.sopra.vgarden.repositories.FichePlanteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import javax.validation.Validator;
+import java.util.List;
 
 @Service
 public class FichePlanteService {
@@ -19,7 +18,7 @@ public class FichePlanteService {
 	private Validator validator;
 
 	public List<FichePlante> getAll() {
-		return fichePlanteRepo.findAll();
+		return fichePlanteRepo.findAll(Sort.by(Sort.Order.asc("id")));
 	}
 
 	public FichePlante getById(Long id) {

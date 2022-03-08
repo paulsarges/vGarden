@@ -31,7 +31,7 @@ public class FicheRavageurRestController {
         return ficheRavageurService.getAll();
     }
 
-    @GetMapping("/{fiches_ravageur_id}")
+    @GetMapping("/{ficheRavageurId}")
     @JsonView(Views.Common.class)
     public FicheRavageur getById(@PathVariable Long ficheRavageurId) {
         return ficheRavageurService.getById(ficheRavageurId);

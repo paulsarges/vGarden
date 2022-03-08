@@ -29,7 +29,7 @@ public class FichePlanteRestController {
         return fichePlanteService.getAll();
     }
 
-    @GetMapping("/{fiches_plante_id}")
+    @GetMapping("/{fichePlanteId}")
     @JsonView(Views.Common.class)
     public FichePlante getById(@PathVariable Long fichePlanteId) {
         return fichePlanteService.getById(fichePlanteId);
