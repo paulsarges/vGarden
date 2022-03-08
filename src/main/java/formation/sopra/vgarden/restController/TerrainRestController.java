@@ -72,11 +72,11 @@ import formation.sopra.vgarden.services.TerrainService;
 		//	"utilisateur": {"id":"100"}
 		//	}
 
-		@GetMapping("/{id}/plante")
-		@JsonView(Views.TerrainWithPlantes.class)
-		public Terrain getByIdWithPlante(@PathVariable Long id) {
-			return terrainService.getByIdWithPlantes(id);
-		}
+//		@GetMapping("/{id}/plante")
+//		@JsonView(Views.TerrainWithPlantes.class)
+//		public Terrain getByIdWithPlante(@PathVariable Long id) {
+//			return terrainService.getByIdWithPlantes(id);
+//		}
 		
 		@PutMapping("/{id}")
 		@JsonView(Views.Common.class)

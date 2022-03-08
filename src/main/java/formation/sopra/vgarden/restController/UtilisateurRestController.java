@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,18 +39,26 @@ public class UtilisateurRestController {
 	}
 	
 	
-	@GetMapping("/{id}/terrain")
-	@JsonView(Views.UtilisateurWithTerrains.class)
-	public Utilisateur getByIdWithTerrain(@PathVariable Long id) {
-		return utilisateurServices.getByIdWithTerrains(id);
+//	@GetMapping("/{id}/terrain")
+//	@JsonView(Views.UtilisateurWithTerrains.class)
+//	public Utilisateur getByIdWithTerrain(@PathVariable Long id) {
+//		return utilisateurServices.getByIdWithTerrains(id);
+//	}
+	
+	@PostMapping("")
+	@JsonView(Views.Common.class)
+	public Utilisateur create(@AuthenticationPrincipal Compte c,@Valid @RequestBody Utilisateur u, BindingResult br) {
+		if (br.hasErrors()) {
+			throw new UtilisateurException("Données incorrectes");
+		}
+		return utilisateurServices.create(u);
 	}
 	
 
-	@PutMapping("/{login}")
+	@PutMapping("")
 	@CrossOrigin
 	@JsonView(Views.Common.class)
-	public Utilisateur modifier(@PathVariable String login,@Valid @RequestBody Utilisateur u, BindingResult br) {
-		Compte c = compteServices.getByLogin(login);
+	public Utilisateur modifier(@AuthenticationPrincipal Compte c,@Valid @RequestBody Utilisateur u, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new UtilisateurException("Données incorrectes");
 		}

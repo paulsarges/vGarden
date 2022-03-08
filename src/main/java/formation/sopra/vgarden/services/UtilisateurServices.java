@@ -36,6 +36,7 @@ public class UtilisateurServices {
 	
 
 	public Utilisateur create(Utilisateur u) {
+		u.setTypeCompte(TypeCompte.Particulier);
 		return utilisateurRepository.save(u);
 	}
 
