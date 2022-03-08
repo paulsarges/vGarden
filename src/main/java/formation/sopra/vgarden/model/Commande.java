@@ -30,6 +30,11 @@ public class Commande {
 	@JsonView(Views.Common.class)
 	private LocalDateTime dateCreation;
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "commande_statut", length = 10)
+	@JsonView(Views.Common.class)
+	private CommandeStatut statut;
+
 	@OneToMany(mappedBy = "id.commande", cascade = CascadeType.REMOVE)
 	@JsonView(Views.CommandeWithCommandeProduits.class)
 	private List<CommandeProduit> commandeProduits = new ArrayList<>();
@@ -51,12 +56,14 @@ public class Commande {
 	public Commande(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 		this.dateCreation = LocalDateTime.now();
+		this.statut = CommandeStatut.EN_ATTENTE;
 	}
 
 	public Commande(Utilisateur utilisateur, List<CommandeProduit> commandeProduits) {
 		this.utilisateur = utilisateur;
 		this.commandeProduits = commandeProduits;
 		this.dateCreation = LocalDateTime.now();
+		this.statut = CommandeStatut.EN_ATTENTE;
 	}
 
 	/**
@@ -93,6 +100,14 @@ public class Commande {
 
 	public void setDateCreation(LocalDateTime dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	public CommandeStatut getStatut() {
+		return statut;
+	}
+
+	public void setStatut(CommandeStatut statut) {
+		this.statut = statut;
 	}
 
 	/**
@@ -141,6 +156,5 @@ public class Commande {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 }
 
