@@ -1,6 +1,9 @@
 package formation.sopra.vgarden.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.time.Month;
 import java.util.List;
 import java.util.Objects;
@@ -13,42 +16,55 @@ import java.util.Set;
 public class FichePlante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFichePlante")
+	@JsonView(Views.Common.class)
 	@Column(name = "id")
 	private Long id;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "nom", length = 50, nullable = true)
 	private String nom;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "eau", nullable = true)
 	private String eau;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "soleil", nullable = true)
 	private String exposition;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "espacement", nullable = true)
 	private String espacement;
-
+	
+	@JsonView(Views.Common.class)
 	@Column(name = "graine", nullable = true)
 	private String dureeConservationGraine;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "calendrier_semer", nullable = true)
 	private String calendrierSemer;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "calendrier_planter", nullable = true)
 	private String calendrierPlanter;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "calendrier_recolter", nullable = true)
 	private String calendrierRecolter;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "bons_copains", nullable = true)
 	private String bonsCopains;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "mauvais_copains", nullable = true)
 	private String mauvaisCopains;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "maladies", nullable = true)
 	private String maladies;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "ravageurs", nullable = true)
 	private String ravageurs;
 	
@@ -78,16 +94,20 @@ public class FichePlante {
 //
 //	@ManyToMany(mappedBy = "plantes")
 //	private List<FicheRavageur> ravageursPlante;
-
+	
+	@JsonView(Views.Common.class)
 	@Column(name = "methode_semer", nullable = true)
 	private String methodeSemer;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "methode_planter", nullable = true)
 	private String methodePlanter;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "methode_entretien", nullable = true)
 	private String methodeEntretien;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "methode_recolte", nullable = true)
 	private String methodeRecolte;
 

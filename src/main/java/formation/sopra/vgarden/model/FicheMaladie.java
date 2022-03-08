@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 
 @Entity
 @Table(name = "fiches_maladie")
@@ -12,15 +14,19 @@ import javax.persistence.*;
 public class FicheMaladie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFicheMaladie")
+	@JsonView(Views.Common.class)
 	@Column(name = "id")
 	private Long id;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "nom", length = 50, nullable = true)
 	private String nom;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "description", nullable = true)
 	private String description;
 	
+	@JsonView(Views.Common.class)
 	@Column(name = "solution", nullable = true)
 	private String solution;
 
