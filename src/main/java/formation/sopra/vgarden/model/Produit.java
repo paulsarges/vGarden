@@ -1,5 +1,7 @@
 package formation.sopra.vgarden.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,15 +12,19 @@ public class Produit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProduit")
 	@Column(name = "produit_id")
+	@JsonView(Views.Common.class)
 	private Long id;
 
 	@Column(name = "produit_nom", length = 50, nullable = false)
+	@JsonView(Views.Common.class)
 	private String nom;
 
 	@Column(name = "produit_stock", nullable = false)
+	@JsonView(Views.Common.class)
 	private double stock;
 
 	@Column(name = "produit_prix", nullable = false)
+	@JsonView(Views.Common.class)
 	private double prix;
 
 	@ManyToOne

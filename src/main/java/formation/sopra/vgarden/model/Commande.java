@@ -113,6 +113,7 @@ public class Commande {
 	 * associé à la commande.
 	 * @return Le prix total de la commande.
 	 */
+	@JsonView(Views.Common.class)
 	public double prixTotal() {
 		return commandeProduits
 				.stream()

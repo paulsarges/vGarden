@@ -28,8 +28,6 @@ public class UtilisateurRestController {
 		return c.getUtilisateur();
 	}
 
-	// L'utilisation de update dans 'CompteRestController' effectue un save en cascade
-	// du coup les modifications de l'utilisateur sont appliqués du coup cette méthode n'est pas nécessaire.
 	@PutMapping("/{login}")
 	@JsonView(Views.Common.class)
 	public Utilisateur modifier(@PathVariable String login,@Valid @RequestBody Utilisateur u, BindingResult br) {

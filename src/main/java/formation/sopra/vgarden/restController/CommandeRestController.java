@@ -1,11 +1,13 @@
 package formation.sopra.vgarden.restController;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import formation.sopra.vgarden.services.CommandeService;
 import formation.sopra.vgarden.exceptions.CommandeException;
 import formation.sopra.vgarden.model.Commande;
+import formation.sopra.vgarden.model.Compte;
 import formation.sopra.vgarden.model.Views;
+import formation.sopra.vgarden.services.CommandeService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,10 +24,16 @@ public class CommandeRestController {
         this.commandeService = commandeService;
     }
 
-    @GetMapping("")
+    /*@GetMapping("")
     @JsonView(Views.Common.class)
     public List<Commande> getAll() {
         return commandeService.getAll();
+    }*/
+
+    @GetMapping("")
+    @JsonView(Views.CommandeWithCommandeProduits.class)
+    public List<Commande> getAll(@AuthenticationPrincipal Compte c) {
+        return commandeService.getByUtilisateurWithCommandeProduits(c.getUtilisateur());
     }
 
     @GetMapping("/{commandeId}")
