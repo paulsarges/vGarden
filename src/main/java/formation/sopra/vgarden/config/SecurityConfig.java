@@ -1,6 +1,9 @@
 package formation.sopra.vgarden.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -26,14 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new
-                UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }
-
+	
 	// gestion des regles sur les URL
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -43,6 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf().disable()
 				.authorizeHttpRequests()
 				.antMatchers(HttpMethod.POST, "/auth").permitAll()
+				.antMatchers(HttpMethod.GET, "/utilisteur/**").authenticated()
+				.antMatchers(HttpMethod.PUT, "/utilisteur/**").authenticated()
 				.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
 //				.antMatchers(HttpMethod.POST).hasRole("ADMIN")
 //				.antMatchers(HttpMethod.PUT).hasRole("ADMIN")
@@ -52,7 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				
 			.and()
 			.httpBasic();
-		http.cors();
 		
 		// @formatter:on
 	}

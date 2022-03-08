@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,6 +24,7 @@ import formation.sopra.vgarden.services.UtilisateurServices;
 
 @RestController
 @RequestMapping("/utilisateur")
+@CrossOrigin(origins = "*")
 public class UtilisateurRestController {
 	@Autowired
 	UtilisateurServices utilisateurServices;
@@ -44,6 +46,7 @@ public class UtilisateurRestController {
 	
 
 	@PutMapping("/{login}")
+	@CrossOrigin
 	@JsonView(Views.Common.class)
 	public Utilisateur modifier(@PathVariable String login,@Valid @RequestBody Utilisateur u, BindingResult br) {
 		Compte c = compteServices.getByLogin(login);

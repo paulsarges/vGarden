@@ -52,14 +52,14 @@ public class CompteRestController {
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@JsonView(Views.Common.class)
-	public Compte inscription(@Valid @RequestBody Compte c, BindingResult br) {
+	public Compte inscription(@RequestBody Compte c, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new CompteException("Données incorrectes");
 		}
 		if (compteRepo.findBylogin(c.getLogin()).isPresent()) {
 			throw new CompteException("Utilisateur existant");
 		}
-		c.setRole(Role.ROLE_USER);
+		c.setRole(Role.ROLE_USER);		
 		return compteServices.save(c);
 	}
 

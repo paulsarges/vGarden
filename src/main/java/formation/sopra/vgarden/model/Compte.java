@@ -28,12 +28,11 @@ public class Compte implements UserDetails{
 	@Column(name = "id")
 	@JsonView(Views.Common.class)
 	protected Long id;
-	@NotNull
-	@Pattern(regexp = "^[a-zA-Z]((_)?([a-zA-Z0-9]{1,}))*$")
 	@Column(name = "login", unique = true, length = 50)
 	@NotNull
 	protected String login;
 	@Column(name = "password", length = 150)
+	@NotNull
 	protected String password;
 	@Enumerated(EnumType.STRING)
 	@CollectionTable(name = "users_roles")
