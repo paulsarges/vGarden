@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import formation.sopra.vgarden.exceptions.FicheMaladieException;
@@ -19,7 +20,7 @@ public class FicheMaladieService {
 	private Validator validator;
 
 	public List<FicheMaladie> getAll() {
-		return maladieRepo.findAll();
+		return maladieRepo.findAll(Sort.by(Sort.Order.asc("id")));
 	}
 
 	public FicheMaladie getById(Long id) {

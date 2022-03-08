@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import formation.sopra.vgarden.exceptions.FicheRavageurException;
@@ -19,7 +20,7 @@ public class FicheRavageurService {
 	private Validator validator;
 
 	public List<FicheRavageur> getAll() {
-		return ravageurRepo.findAll();
+		return ravageurRepo.findAll(Sort.by(Sort.Order.asc("id")));
 	}
 
 	public FicheRavageur getById(Long id) {
