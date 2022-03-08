@@ -1,6 +1,9 @@
 package formation.sopra.vgarden.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -11,15 +14,19 @@ import java.util.Objects;
 public class FicheRavageur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFicheRavageur")
+	@JsonView(Views.Common.class)
 	@Column(name = "id")
 	private Long id;
 
 	@Column(name = "nom", length = 50, nullable = true)
+	@JsonView(Views.Common.class)
 	private String nom;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "description", nullable = true)
 	private String description;
 
+	@JsonView(Views.Common.class)
 	@Column(name = "solution", nullable = true)
 	private String solution;
 
