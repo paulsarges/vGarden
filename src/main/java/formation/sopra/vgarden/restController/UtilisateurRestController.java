@@ -35,7 +35,7 @@ public class UtilisateurRestController {
 	@GetMapping("/info")
 	@JsonView(Views.Common.class)
 	public Utilisateur getUtilisateur(@AuthenticationPrincipal Compte c) {
-		return c.getUtilisateur();
+		return utilisateurServices.getByCompte(c);
 	}
 	
 	
