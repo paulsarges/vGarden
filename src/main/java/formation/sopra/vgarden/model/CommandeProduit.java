@@ -57,6 +57,17 @@ public class CommandeProduit {
 		this.quantite = quantite;
 	}
 
+	/**
+	 * Recupère le prix total du produit
+	 * par rapport au prix et à la quantité du produit
+	 * associé à la commande.
+	 * @return Le prix total du produit.
+	 */
+	@JsonView(Views.Common.class)
+	public double prixTotal() {
+		return this.id.getProduit().getPrix() * this.quantite;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
