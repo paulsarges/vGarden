@@ -47,6 +47,7 @@ public class Commande {
 	 */
 	public Commande() {
 		this.dateCreation = LocalDateTime.now();
+		this.statut = CommandeStatut.EN_ATTENTE;
 	}
 
 	/**
