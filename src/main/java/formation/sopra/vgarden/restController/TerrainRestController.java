@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.sopra.vgarden.exceptions.TerrainException;
+import formation.sopra.vgarden.model.Compte;
 import formation.sopra.vgarden.model.Terrain;
 import formation.sopra.vgarden.model.Utilisateur;
 import formation.sopra.vgarden.model.Views;
@@ -35,9 +37,9 @@ import formation.sopra.vgarden.services.TerrainService;
 		private TerrainService terrainService;
 
 		@GetMapping("")
-		@JsonView(Views.Common.class)
-		public List<Terrain> getByUtilisateur(@PathVariable Utilisateur utilisateur) {
-			List<Terrain> list = terrainService.getByUtilisateur(utilisateur);
+		@JsonView(Views.UtilisateurWithTerrains.class)
+		public List<Terrain> getByUtilisateur(@AuthenticationPrincipal Compte compte) {
+			List<Terrain> list = terrainService.getByUtilisateur(compte.getUtilisateur());
 			System.out.println(list);
 			return list;
 		}
