@@ -13,9 +13,9 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
     @Query("SELECT c from Commande c left join fetch c.commandeProduits where c.id=:id")
     Optional<Commande> findByIdWithCommandeProduits(@Param("id") Long id);
 
-    @Query("SELECT c from Commande c join fetch c.commandeProduits cp where cp.id.produit.plante.terrain.utilisateur = :vendeur")
+    @Query("SELECT DISTINCT c from Commande c join fetch c.commandeProduits cp where cp.id.produit.plante.terrain.utilisateur = :vendeur")
     List<Commande> findByVendeurWithCommandeProduits(@Param("vendeur") Utilisateur vendeur);
 
-    @Query("SELECT c from Commande c join fetch c.commandeProduits cp where c.utilisateur = :utilisateur")
+    @Query("SELECT DISTINCT c from Commande c join fetch c.commandeProduits cp where c.utilisateur = :utilisateur")
     List<Commande> findByUtilisateurWithCommandeProduits(@Param("utilisateur") Utilisateur utilisateur);
 }
