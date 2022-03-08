@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 @DiscriminatorValue(value = "utilisateur")
 @SequenceGenerator(name = "utilisateurSeq", sequenceName = "utilisateur_seq", allocationSize = 1, initialValue = 100)
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class Utilisateur{
 	@Id
 	@GeneratedValue(generator = "utilisateurSeq", strategy = GenerationType.SEQUENCE)
