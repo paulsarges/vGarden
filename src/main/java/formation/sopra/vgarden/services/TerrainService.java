@@ -6,7 +6,6 @@ import javax.validation.Validator;
 
 import org.springframework.stereotype.Service;
 
-
 import formation.sopra.vgarden.exceptions.TerrainException;
 
 import formation.sopra.vgarden.model.Terrain;
@@ -35,6 +34,12 @@ public class TerrainService {
             throw new TerrainException("Terrain non trouvé");
         });
     }
+	
+	public Terrain getByIdWithPlantes(Long id) {
+		return terrainRepository.findByIdWithPlantes(id).orElseThrow(() -> {
+		throw new TerrainException("Compte inexistant par find by login");
+	});}
+
 
 	public void delete(Terrain terrain) {
 		terrainRepository.delete(terrain);

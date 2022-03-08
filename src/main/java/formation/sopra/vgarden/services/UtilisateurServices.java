@@ -4,8 +4,10 @@ package formation.sopra.vgarden.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import formation.sopra.vgarden.exceptions.TerrainException;
 import formation.sopra.vgarden.exceptions.UtilisateurException;
 import formation.sopra.vgarden.model.Compte;
+import formation.sopra.vgarden.model.Terrain;
 import formation.sopra.vgarden.model.TypeCompte;
 import formation.sopra.vgarden.model.Utilisateur;
 import formation.sopra.vgarden.repositories.UtilisateurRepository;
@@ -27,6 +29,11 @@ public class UtilisateurServices {
 		}
 
 	}
+	public Utilisateur getByIdWithTerrains(Long id) {
+		return utilisateurRepository.findByIdWithTerrains(id).orElseThrow(() -> {
+		throw new UtilisateurException("Compte inexistant par find by ID");
+	});}
+	
 
 	public Utilisateur create(Utilisateur u) {
 		return utilisateurRepository.save(u);
