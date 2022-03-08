@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+
 
 @Entity
 @Table(name = "terrain")
@@ -25,31 +28,40 @@ public class Terrain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTerrain")
+	@JsonView(Views.Common.class)
 	private Long id;
 
 	@Column(name = "surface")
+	@JsonView(Views.Common.class)
 	private double surface;
 
 	@Column(name = "localisation", length = 50, nullable = true)
+	@JsonView(Views.Common.class)
 	private String localisation;
 
 	@Column(name = "dureeExpoSoleil")
+	@JsonView(Views.Common.class)
 	private double dureeExpoSoleil;
 
 	@Column(name = "decoupageTerrainLongeur")
+	@JsonView(Views.Common.class)
 	private double decoupageTerrainLongeur;
 
 	@Column(name = "decoupageTerrainLargeur")
+	@JsonView(Views.Common.class)
 	private double decoupageTerrainLargeur;
 
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.Common.class)
 	@Column(name = "typeDeSol", length = 20)
 	private TypeDeSol typeDeSol;
 
 	@ManyToOne
 	@JoinColumn(name = "proprietaire", foreignKey = @ForeignKey(name = "utilisateur_terrain_fk"))
+	@JsonView(Views.TerrainWithUtilisateur.class)
 	private Utilisateur utilisateur;
 
+	@JsonView(Views.TerrainWithPlantes.class)
 	@OneToMany(mappedBy = "terrain")
 	private List<Plante> plantes;
 

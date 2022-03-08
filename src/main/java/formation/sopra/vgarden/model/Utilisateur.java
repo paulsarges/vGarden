@@ -1,15 +1,29 @@
 package formation.sopra.vgarden.model;
 
-import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.fasterxml.jackson.annotation.JsonView;
-
-import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @DiscriminatorValue(value = "utilisateur")
@@ -36,8 +50,10 @@ public class Utilisateur{
 	@OneToMany(mappedBy = "utilisateur")
 	private Set<Commande> achats;
 	@OneToMany(mappedBy = "utilisateur")
+	@JsonView(Views.UtilisateurWithTerrains.class)
 	private List<Terrain> terrains;
 	@Transient
+	
 	private List<Produit> produits;
 	@OneToOne
 	@JoinColumn(name = "compte_id", foreignKey = @ForeignKey(name = "compte_id_fk"))
