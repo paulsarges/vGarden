@@ -17,27 +17,26 @@ public class Plante {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPlantes")
 	@Column(name = "planteId")
 	private Long Id;
-	
+
 	@JsonView(Views.PlantesWithTerrain.class)
 	@ManyToOne
 	@JoinColumn(name = "planteTerrain", foreignKey = @ForeignKey(name = "plante_terrain_fk"))
 	private Terrain terrain;
-	
+
 	@Embedded
-	@Column(name = "planteEmplacement", nullable = true)
 	@JsonView(Views.Common.class)
 	private Emplacement emplacementPlante;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "planteType")
 	@JsonView(Views.Common.class)
 	private TypePlante typePlante;
-	
+
 	@Column(name = "planteCroissance")
 	@JsonView(Views.Common.class)
-	private int croissance; 
-	
-	
+	private int croissance;
+
+
 	//Entre 1 et 3 ?  - Determinera l'image de la plante (ou une barre de croissance).
 	//@Enumerated(EnumType.STRING)
 	//@Column(name = "planteSolFavori")
@@ -49,15 +48,15 @@ public class Plante {
 	//private boolean besoinSemi; //
 	//@Column(name = "planteDateRepiquage")
 	//private LocalDate dateRepiquage; // Si besoin semi - A afficher sur l'appli � titre informatif dans la fiche de la plante.
-	
+
 	@JsonView(Views.Common.class)
 	@Column(name = "planteDatePlantation")
 	private LocalDate datePlantation; // A afficher dans la fiche de la plante
-	
+
 	@JsonView(Views.Common.class)
 	@Column(name = "planteArrosageOk")
 	private boolean arrosageOk; // Pour la notif d'arrosage.
-	
+
 	@JsonView(Views.Common.class)
 	@Column(name = "planteDateRecolte")
 	private LocalDate dateRecolte; //
@@ -65,6 +64,10 @@ public class Plante {
 	//private LocalDate datePlantationOptimale; // Pour conseiller l'utilisateur sur la date de plantation.
 	//@Column(name = "plante_DateSemiOptimale")
 	//private LocalDate dateSemiOptimale; // Pour conseiller l'utilisateur sur la date de mise en semi.
+
+	public Plante() {
+
+	}
 
 	public Long getId() {
 		return Id;

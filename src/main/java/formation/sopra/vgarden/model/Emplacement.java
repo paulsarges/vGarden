@@ -1,13 +1,17 @@
 package formation.sopra.vgarden.model;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
 public class Emplacement {
 
+	@JsonView(Views.Common.class)
 	private double positionX;
+
+	@JsonView(Views.Common.class)
 	private double positionY;
 
 	public Emplacement() {
