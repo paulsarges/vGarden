@@ -30,13 +30,19 @@ public class CommandeRestController {
         return commandeService.getAll();
     }*/
 
-    @GetMapping("")
+    @GetMapping("/achat")
     @JsonView(Views.CommandeWithCommandeProduits.class)
-    public List<Commande> getAll(@AuthenticationPrincipal Compte c) {
-        return commandeService.getByUtilisateurWithCommandeProduits(c.getUtilisateur());
+    public List<Commande> getAllAchat(@AuthenticationPrincipal Compte c) {
+        return commandeService.getByUtilisateurAchatWithCommandeProduits(c.getUtilisateur());
     }
 
-    @GetMapping("/{commandeId}")
+    @GetMapping("/vente")
+    @JsonView(Views.CommandeWithCommandeProduits.class)
+    public List<Commande> getAllVente(@AuthenticationPrincipal Compte c) {
+        return commandeService.getByUtilisateurVenteWithCommandeProduits(c.getUtilisateur());
+    }
+
+    @GetMapping("/id/{commandeId}")
     @JsonView(Views.CommandeWithCommandeProduits.class)
     public Commande getById(@PathVariable Long commandeId) {
         return commandeService.getByIdWithCommandeProduits(commandeId);

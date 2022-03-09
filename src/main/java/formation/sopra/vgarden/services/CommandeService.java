@@ -43,8 +43,12 @@ public class CommandeService {
         });
     }
 
-    public List<Commande> getByUtilisateurWithCommandeProduits(Utilisateur utilisateur) {
-        return commandeRepository.findByUtilisateurWithCommandeProduits(utilisateur);
+    public List<Commande> getByUtilisateurAchatWithCommandeProduits(Utilisateur utilisateur) {
+        return commandeRepository.findByUtilisateurAchatWithCommandeProduits(utilisateur);
+    }
+
+    public List<Commande> getByUtilisateurVenteWithCommandeProduits(Utilisateur utilisateur) {
+        return commandeRepository.findByUtilisateurVenteWithCommandeProduits(utilisateur);
     }
 
     public Commande createOrUpdate(Commande commande) {
