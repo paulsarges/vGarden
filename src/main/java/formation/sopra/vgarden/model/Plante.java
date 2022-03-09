@@ -117,6 +117,23 @@ public class Plante {
 	public void setDateRecolte(LocalDate dateRecolte) {
 		this.dateRecolte = dateRecolte;
 	}
+	
+	
+	
+	public Plante(Long id, Terrain terrain, Emplacement emplacementPlante, TypePlante typePlante, int croissance,
+			LocalDate datePlantation, boolean arrosageOk, LocalDate dateRecolte) {
+		super();
+		Id = id;
+		this.terrain = terrain;
+		this.emplacementPlante = emplacementPlante;
+		this.typePlante = typePlante;
+		this.croissance = croissance;
+		this.datePlantation = datePlantation;
+		this.arrosageOk = arrosageOk;
+		this.dateRecolte = dateRecolte;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(Id);
