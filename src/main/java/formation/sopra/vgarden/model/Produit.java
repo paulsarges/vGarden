@@ -2,7 +2,13 @@ package formation.sopra.vgarden.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import java.util.Objects;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "produit")
@@ -12,7 +18,7 @@ public class Produit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProduit")
 	@Column(name = "produit_id")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.Common.class)	
 	private Long id;
 
 	@Column(name = "produit_nom", length = 50, nullable = false)
@@ -21,15 +27,23 @@ public class Produit {
 
 	@Column(name = "produit_stock", nullable = false)
 	@JsonView(Views.Common.class)
+	@NonNull
+	@Min(value = 0)
 	private double stock;
 
 	@Column(name = "produit_prix", nullable = false)
 	@JsonView(Views.Common.class)
+	@NonNull
+	@Min(value = 0)
 	private double prix;
 
 	@ManyToOne
 	@JoinColumn(name = "produit_plante", foreignKey = @ForeignKey(name = "produit_plante_fk"))
 	private Plante plante;
+	
+	@ManyToOne
+	@JoinColumn(name = "produit_utilisateur_id", foreignKey = @ForeignKey(name = "produit_utilisateur_fk"))
+	private Utilisateur utilisateur;
 
 	public Produit() {
 
@@ -82,10 +96,36 @@ public class Produit {
 	public void setPlante(Plante plante) {
 		this.plante = plante;
 	}
+	
+	
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", nom=" + nom + ", stock=" + stock + ", prix=" + prix + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produit other = (Produit) obj;
+		return Objects.equals(id, other.id);
+	}
 }

@@ -53,7 +53,8 @@ public class Utilisateur{
 	@JsonView(Views.UtilisateurWithTerrains.class)
 	private List<Terrain> terrains;
 	@Transient
-	
+	@OneToMany(mappedBy = "utilisateur")
+	@JsonView(Views.Common.class)
 	private List<Produit> produits;
 	@OneToOne
 	@JoinColumn(name = "compte_id", foreignKey = @ForeignKey(name = "compte_id_fk"))

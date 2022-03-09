@@ -29,16 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
-	@Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new
-                UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }
-
-	
+		
 	
 	// gestion des regles sur les URL
 	@Override
@@ -60,7 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				
 			.and()
 			.httpBasic();
-		http.cors();
 
 		
 		// @formatter:on
