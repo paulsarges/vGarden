@@ -34,19 +34,14 @@ public class PlanteRestController {
 	@Autowired
 	private PlanteService planteService;
 
-	@GetMapping("")
+	/*@GetMapping("/t/{terrain}")
 	@JsonView(Views.Common.class)
 	public List<Plante> getByTerrain(@PathVariable Terrain terrain) {
 		List<Plante> list = planteService.getByTerrain(terrain);
 		System.out.println(list);
 		return list;
-	}
+	}*/
 
-//	@GetMapping("/get")
-//	@JsonView(Views.Common.class)
-//	public Plante getById(@RequestParam Long id) {
-//		return planteService.getById(id);
-//	}
 
 	@GetMapping("/{id}")
 	@JsonView(Views.Common.class)
@@ -54,11 +49,6 @@ public class PlanteRestController {
 		return planteService.getById(id);
 	}
 
-	//@GetMapping("/{id}/plante")
-	//@JsonView(Views.PlanteWithEmploye.class)
-	//public Plante getByIdWithEmploye(@PathVariable Long id) {
-	//	return planteService.getByIdWithEmployes(id);
-	//}
 
 	@PostMapping("")
 	@JsonView(Views.Common.class)
@@ -73,7 +63,7 @@ public class PlanteRestController {
 	//	"emplacementPlante": 
 	//	{"positionx":"2",
 	//	"positiony":"2"},
-	//	"typePlante": "Carotte"}
+	//	"typePlante": "Ail"}
 	
 	
 	@PutMapping("/{id}")

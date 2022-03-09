@@ -13,8 +13,13 @@ public class Views {
     
     public static class UtilisateurWithTerrains extends Common{}
     
-    public static class Terrain extends Common{
-    	
-    }
-    public static class TerrainWithUtilisateur extends Terrain{}
+    
+    
+    public static class Plantes extends Common{}
+        
+    	public static class PlantesWithTerrain extends Plantes{}
+    
+    public static class Terrain extends Common{}
+    
+    	public static class TerrainWithUtilisateur extends Terrain{}
 }
