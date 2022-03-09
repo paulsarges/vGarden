@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/fiches_plante")
+@CrossOrigin(origins = "*")
 public class FichePlanteRestController {
 
     private final FichePlanteService fichePlanteService;

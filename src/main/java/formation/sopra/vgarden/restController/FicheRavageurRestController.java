@@ -17,6 +17,7 @@ import formation.sopra.vgarden.services.FicheRavageurService;
 
 @RestController
 @RequestMapping("/fiches_ravageur")
+@CrossOrigin(origins = "*")
 public class FicheRavageurRestController {
 
     private final FicheRavageurService ficheRavageurService;
