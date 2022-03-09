@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+
 import formation.sopra.vgarden.exceptions.FicheRavageurException;
 import formation.sopra.vgarden.model.FicheRavageur;
 import formation.sopra.vgarden.model.Views;
@@ -54,4 +55,16 @@ public class FicheRavageurRestController {
     public void delete(@PathVariable Long id) {
     	ficheRavageurService.delete(id);
     }
+    
+    @PutMapping("/{id}")
+	@JsonView(Views.Common.class)
+	public FicheRavageur update(@Valid @RequestBody FicheRavageur ficheRavageur, BindingResult br, @PathVariable Long id) {
+		if (br.hasErrors()) {
+			throw new FicheRavageurException();
+		}
+		if (!ficheRavageurService.exist(id)) {
+			throw new FicheRavageurException();
+		}
+		return ficheRavageurService.save(ficheRavageur);
+	}
 }
