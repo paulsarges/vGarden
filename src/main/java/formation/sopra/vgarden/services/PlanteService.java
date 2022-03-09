@@ -7,6 +7,8 @@ import formation.sopra.vgarden.repositories.PlanteRepository;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Validator;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -43,6 +45,7 @@ public class PlanteService {
 	public Plante createOrUpdate(Plante plante) {
 		check(plante);
 		if (plante.getId()==null) {
+			plante.setDatePlantation(LocalDate.now());
 			return planteRepository.save(plante);
 		} else {
 			Plante planteEnBase = getById(plante.getId());
