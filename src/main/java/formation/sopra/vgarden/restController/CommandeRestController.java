@@ -28,12 +28,20 @@ public class CommandeRestController {
     @GetMapping("/achat")
     @JsonView(Views.CommandeWithCommandeProduits.class)
     public List<Commande> getAllAchat(@AuthenticationPrincipal Compte c) {
+        if(c.getUtilisateur() == null) {
+            throw new CommandeException();
+        }
+
         return commandeService.getByUtilisateurAchatWithCommandeProduits(c.getUtilisateur());
     }
 
     @GetMapping("/vente")
     @JsonView(Views.CommandeWithCommandeProduits.class)
     public List<Commande> getAllVente(@AuthenticationPrincipal Compte c) {
+        if(c.getUtilisateur() == null) {
+            throw new CommandeException();
+        }
+
         return commandeService.getByUtilisateurVenteWithCommandeProduits(c.getUtilisateur());
     }
 
@@ -46,10 +54,12 @@ public class CommandeRestController {
     @PostMapping("")
     @JsonView(Views.Common.class)
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Commande create(@Valid @RequestBody Commande commande, BindingResult result) {
-        if(result.hasErrors()) {
+    public Commande create(@AuthenticationPrincipal Compte c, @Valid @RequestBody Commande commande, BindingResult result) {
+        if(result.hasErrors() || c.getUtilisateur() == null) {
             throw new CommandeException();
         }
+
+        commande.setUtilisateur(c.getUtilisateur());
 
         return commandeService.createOrUpdate(commande);
     }
