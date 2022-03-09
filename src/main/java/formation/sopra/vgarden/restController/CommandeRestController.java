@@ -24,12 +24,6 @@ public class CommandeRestController {
         this.commandeService = commandeService;
     }
 
-    /*@GetMapping("")
-    @JsonView(Views.Common.class)
-    public List<Commande> getAll() {
-        return commandeService.getAll();
-    }*/
-
     @GetMapping("/achat")
     @JsonView(Views.CommandeWithCommandeProduits.class)
     public List<Commande> getAllAchat(@AuthenticationPrincipal Compte c) {
@@ -48,12 +42,6 @@ public class CommandeRestController {
         return commandeService.getByIdWithCommandeProduits(commandeId);
     }
 
-    /*@GetMapping("/{commandeId}/produits")
-    @JsonView(Views.CommandeWithCommandeProduits.class)
-    public Commande getByIdWithCommandeProduits(@PathVariable Long commandeId) {
-        return commandeService.getByIdWithCommandeProduits(commandeId);
-    }*/
-
     @PostMapping("")
     @JsonView(Views.Common.class)
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -62,6 +50,18 @@ public class CommandeRestController {
             throw new CommandeException();
         }
 
+        return commandeService.createOrUpdate(commande);
+    }
+
+    @PutMapping("/{id}")
+    @JsonView(Views.Common.class)
+    public Commande update(@Valid @RequestBody Commande commande, BindingResult br, @PathVariable Long id) {
+        if (br.hasErrors()) {
+            throw new CommandeException();
+        }
+        if (!commandeService.exist(id)) {
+            throw new CommandeException();
+        }
         return commandeService.createOrUpdate(commande);
     }
 

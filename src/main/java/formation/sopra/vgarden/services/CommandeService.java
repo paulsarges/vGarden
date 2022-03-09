@@ -84,6 +84,10 @@ public class CommandeService {
         }
     }
 
+    public boolean exist(Long id) {
+        return commandeRepository.existsById(id);
+    }
+
     public void delete(Commande commande) {
         if (commande == null || commande.getId() == null) {
             throw new CommandeException();
