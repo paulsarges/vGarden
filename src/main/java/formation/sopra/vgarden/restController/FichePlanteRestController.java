@@ -2,7 +2,9 @@ package formation.sopra.vgarden.restController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import formation.sopra.vgarden.exceptions.FichePlanteException;
+import formation.sopra.vgarden.exceptions.FicheRavageurException;
 import formation.sopra.vgarden.model.FichePlante;
+import formation.sopra.vgarden.model.FicheRavageur;
 import formation.sopra.vgarden.model.Views;
 import formation.sopra.vgarden.services.FichePlanteService;
 
@@ -52,4 +54,16 @@ public class FichePlanteRestController {
     public void delete(@PathVariable Long id) {
     	fichePlanteService.delete(id);
     }
+    
+    @PutMapping("/{id}")
+	@JsonView(Views.Common.class)
+	public FichePlante update(@Valid @RequestBody FichePlante fichePlante, BindingResult br, @PathVariable Long id) {
+		if (br.hasErrors()) {
+			throw new FichePlanteException();
+		}
+		if (!fichePlanteService.exist(id)) {
+			throw new FicheRavageurException();
+		}
+		return fichePlanteService.save(fichePlante);
+	}
 }

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "fiches_ravageur")
-@SequenceGenerator(name = "seqFicheRavageur", sequenceName = "seq_fiche_ravageur", initialValue = 18, allocationSize = 1)
+@SequenceGenerator(name = "seqFicheRavageur", sequenceName = "seq_fiche_ravageur", initialValue = 100, allocationSize = 1)
 public class FicheRavageur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFicheRavageur")
