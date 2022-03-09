@@ -36,7 +36,7 @@ public class Produit {
 	@NonNull
 	@Min(value = 0)
 	private double prix;
-
+	@JsonView(Views.Common.class)
 	@ManyToOne
 	@JoinColumn(name = "produit_plante", foreignKey = @ForeignKey(name = "produit_plante_fk"))
 	private Plante plante;
