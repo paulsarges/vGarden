@@ -3,7 +3,6 @@ package formation.sopra.vgarden.model;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,6 @@ public class Commande {
 	private Long id;
 
 	@ManyToOne
-	@NotNull
 	@JoinColumn(name = "commande_utilisateur_id", foreignKey = @ForeignKey(name = "commande_utilisateur_id_fk"))
 	@JsonView(Views.CommandeWithUtilisateur.class)
 	private Utilisateur utilisateur;
