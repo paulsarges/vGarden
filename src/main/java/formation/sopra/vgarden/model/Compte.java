@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -36,6 +35,7 @@ public class Compte implements UserDetails{
 	protected String password;
 	@Enumerated(EnumType.STRING)
 	@CollectionTable(name = "users_roles")
+	@JsonView(Views.Common.class)
 	protected Role role;
 	private boolean enable = true;
 	@OneToOne(mappedBy = "compte", cascade = CascadeType.ALL)

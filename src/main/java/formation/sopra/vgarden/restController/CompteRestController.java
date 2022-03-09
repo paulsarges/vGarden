@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
@@ -31,11 +29,10 @@ public class CompteRestController {
 		this.passwordEncoder = passwordEncoder;
 	}
 
+	@JsonView(Views.Common.class)
 	@GetMapping("")
-	public void auth(@AuthenticationPrincipal Compte c ) {
-		System.out.println(c.getUsername());
-		System.out.println(c.getPassword());
-		System.out.println(c.getRole());
+	public Compte auth(@AuthenticationPrincipal Compte c ) {
+		return c;
 	}
 
 	/* REST EXEMPLE POUR CREATION COMPTE AVEC UTILISATEUR
@@ -59,7 +56,7 @@ public class CompteRestController {
 		if (compteRepo.findBylogin(c.getLogin()).isPresent()) {
 			throw new CompteException("Utilisateur existant");
 		}
-		c.setRole(Role.ROLE_USER);		
+		c.setRole(Role.ROLE_USER);
 		return compteServices.save(c);
 	}
 
