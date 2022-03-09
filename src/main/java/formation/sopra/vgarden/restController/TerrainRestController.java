@@ -23,9 +23,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.sopra.vgarden.exceptions.TerrainException;
 import formation.sopra.vgarden.model.Compte;
+import formation.sopra.vgarden.model.Plante;
 import formation.sopra.vgarden.model.Terrain;
 import formation.sopra.vgarden.model.Utilisateur;
 import formation.sopra.vgarden.model.Views;
+import formation.sopra.vgarden.services.PlanteService;
 import formation.sopra.vgarden.services.TerrainService;
 
 	@RestController
@@ -35,12 +37,22 @@ import formation.sopra.vgarden.services.TerrainService;
 
 		@Autowired
 		private TerrainService terrainService;
+		@Autowired
+		private PlanteService planteService;
 
 		@GetMapping("")
-		@JsonView(Views.UtilisateurWithTerrains.class)
+		@JsonView(Views.Common.class)
 		public List<Terrain> getByUtilisateur(@AuthenticationPrincipal Compte compte) {
 			List<Terrain> list = terrainService.getByUtilisateur(compte.getUtilisateur());
 			System.out.println(list);
+			System.out.println("laaaa");
+			return list;
+		}
+		
+		@GetMapping("/{terrain}/plantes")
+		@JsonView(Views.TerrainWithPlantes.class)
+		public List<Plante> getByTerrain(@PathVariable Terrain terrain) {
+			List<Plante> list = planteService.getByTerrain(terrain);
 			return list;
 		}
 
