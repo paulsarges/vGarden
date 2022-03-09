@@ -16,7 +16,7 @@ public class Plante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPlantes")
 	@Column(name = "planteId")
-	private long Id;
+	private Long Id;
 	
 	@JsonView(Views.PlantesWithTerrain.class)
 	@ManyToOne
@@ -24,7 +24,7 @@ public class Plante {
 	private Terrain terrain;
 	
 	@Embedded
-	@Column(name = "planteEmplacement")
+	@Column(name = "planteEmplacement", nullable = true)
 	@JsonView(Views.Common.class)
 	private Emplacement emplacementPlante;
 	
@@ -66,10 +66,10 @@ public class Plante {
 	//@Column(name = "plante_DateSemiOptimale")
 	//private LocalDate dateSemiOptimale; // Pour conseiller l'utilisateur sur la date de mise en semi.
 
-	public long getId() {
+	public Long getId() {
 		return Id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 	public Terrain getTerrain() {

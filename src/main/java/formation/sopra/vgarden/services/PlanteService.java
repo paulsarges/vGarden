@@ -42,7 +42,7 @@ public class PlanteService {
 
 	public Plante createOrUpdate(Plante plante) {
 		check(plante);
-		if (plante.getId()==0L) {
+		if (plante.getId()==null) {
 			return planteRepository.save(plante);
 		} else {
 			Plante planteEnBase = getById(plante.getId());
