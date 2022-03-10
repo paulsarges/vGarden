@@ -45,7 +45,6 @@ public class ProduitService {
 			new ProduitException("Erreur produit"));
 		produitBase.setPrix(produit.getPrix());
 		produitBase.setStock(produit.getStock());
-		produitBase.setPlante(produit.getPlante());
 		return produitRepo.save(produitBase);
 	}
 	

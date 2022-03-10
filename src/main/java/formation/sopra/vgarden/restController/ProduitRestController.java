@@ -42,8 +42,14 @@ public class ProduitRestController {
 	
 	@GetMapping("")
 	@JsonView(Views.Common.class)
-	public List<Produit> getAll(){
-		return produitService.getAll();
+	public List<Produit> getAll(@AuthenticationPrincipal Compte c){
+		List<Produit> produits = produitService.getAll();
+		List<Produit> produitUtilisateur = produitService.getByUtilisateur(c);
+		for (Produit p : produitUtilisateur) {
+			produits.remove(p);
+		}		
+		System.out.println(produits);
+		return produits;
 	}
 	
 	@GetMapping("/{id}")
