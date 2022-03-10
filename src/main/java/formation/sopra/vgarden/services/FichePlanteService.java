@@ -25,9 +25,9 @@ public class FichePlanteService {
 		return fichePlanteRepo.findById(id).orElseThrow(FichePlanteException::new);
 	}
 	
-	public Long getIdByNom(String nom) {
+	public FichePlante getByNom(String nom) {
 		FichePlante fichePlante = fichePlanteRepo.findByNom(nom).orElseThrow(FichePlanteException::new);
-		return fichePlante.getId();
+		return fichePlante;
 	}
 
 	public void delete(FichePlante fichePlante) {

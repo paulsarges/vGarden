@@ -6,6 +6,7 @@ import formation.sopra.vgarden.exceptions.FicheRavageurException;
 import formation.sopra.vgarden.model.FichePlante;
 import formation.sopra.vgarden.model.FicheRavageur;
 import formation.sopra.vgarden.model.Views;
+import formation.sopra.vgarden.model.TypePlante;
 import formation.sopra.vgarden.services.FichePlanteService;
 
 import org.springframework.http.HttpStatus;
@@ -40,8 +41,9 @@ public class FichePlanteRestController {
     
     @GetMapping("/{nom}")
     @JsonView(Views.Common.class)
-    public Long getIdByNom(@PathVariable String nom) {
-    	return fichePlanteService.getIdByNom(nom);
+    public FichePlante getByNom(@PathVariable TypePlante typePlante) {
+    	String nom = typePlante.getNom();
+    	return fichePlanteService.getByNom(nom);
     }
 
     @PostMapping("")
