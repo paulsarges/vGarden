@@ -49,12 +49,13 @@ public class Produit {
 
 	}
 
-	public Produit(String nom, double stock, double prix, Plante plante) {
+	public Produit(String nom, double stock, double prix, Plante plante, Utilisateur utilisateur) {
 		super();
 		this.nom = nom;
 		this.stock = stock;
 		this.prix = prix;
 		this.plante = plante;
+		this.utilisateur = utilisateur;
 	}
 
 	public Long getId() {
