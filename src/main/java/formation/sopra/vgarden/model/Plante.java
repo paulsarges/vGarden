@@ -27,10 +27,9 @@ public class Plante {
 	@JsonView(Views.Common.class)
 	private Emplacement emplacementPlante;
 
-	@Enumerated(EnumType.STRING)
 	@Column(name = "planteType")
 	@JsonView(Views.Common.class)
-	private TypePlante typePlante;
+	private String typePlante;
 
 	@Column(name = "planteCroissance")
 	@JsonView(Views.Common.class)
@@ -68,6 +67,18 @@ public class Plante {
 	public Plante() {
 
 	}
+	
+	public Plante(Terrain terrain, Emplacement emplacementPlante, String typePlante, int croissance,
+			LocalDate datePlantation, boolean arrosageOk, LocalDate dateRecolte) {
+		super();
+		this.terrain = terrain;
+		this.emplacementPlante = emplacementPlante;
+		this.typePlante = typePlante;
+		this.croissance = croissance;
+		this.datePlantation = datePlantation;
+		this.arrosageOk = arrosageOk;
+		this.dateRecolte = dateRecolte;
+	}
 
 	public Long getId() {
 		return Id;
@@ -87,10 +98,10 @@ public class Plante {
 	public void setEmplacementPlante(Emplacement emplacementPlante) {
 		this.emplacementPlante = emplacementPlante;
 	}
-	public TypePlante getTypePlante() {
+	public String getTypePlante() {
 		return typePlante;
 	}
-	public void setTypePlante(TypePlante typePlante) {
+	public void setTypePlante(String typePlante) {
 		this.typePlante = typePlante;
 	}
 	public int getCroissance() {
@@ -120,18 +131,7 @@ public class Plante {
 	
 	
 	
-	public Plante(Long id, Terrain terrain, Emplacement emplacementPlante, TypePlante typePlante, int croissance,
-			LocalDate datePlantation, boolean arrosageOk, LocalDate dateRecolte) {
-		super();
-		Id = id;
-		this.terrain = terrain;
-		this.emplacementPlante = emplacementPlante;
-		this.typePlante = typePlante;
-		this.croissance = croissance;
-		this.datePlantation = datePlantation;
-		this.arrosageOk = arrosageOk;
-		this.dateRecolte = dateRecolte;
-	}
+	
 	
 	
 	@Override

@@ -27,7 +27,7 @@ class PlanteRepositoryTest {
 	void test() {
 
 		Plante plante = new Plante();
-		plante.setTypePlante(TypePlante.Ail);
+		plante.setTypePlante("Ail");
 		plante.setDatePlantation(LocalDate.now());
 		plante.setArrosageOk(true);
 		Emplacement emplacement = new Emplacement(2,2);

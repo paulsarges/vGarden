@@ -41,9 +41,8 @@ public class FichePlanteRestController {
     
     @GetMapping("/{nom}")
     @JsonView(Views.Common.class)
-    public FichePlante getByNom(@PathVariable TypePlante typePlante) {
-    	String nom = typePlante.getNom();
-    	return fichePlanteService.getByNom(nom);
+    public FichePlante getByNom(@PathVariable String typePlante) {
+    	return fichePlanteService.getByNom(typePlante);
     }
 
     @PostMapping("")
