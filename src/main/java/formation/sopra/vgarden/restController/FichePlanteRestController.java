@@ -37,6 +37,12 @@ public class FichePlanteRestController {
     public FichePlante getById(@PathVariable Long fichePlanteId) {
         return fichePlanteService.getById(fichePlanteId);
     }
+    
+    @GetMapping("/{nom}")
+    @JsonView(Views.Common.class)
+    public Long getIdByNom(@PathVariable String nom) {
+    	return fichePlanteService.getIdByNom(nom);
+    }
 
     @PostMapping("")
     @JsonView(Views.Common.class)
