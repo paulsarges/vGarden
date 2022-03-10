@@ -26,7 +26,7 @@ public class FichePlanteService {
 	}
 	
 	public Long getIdByNom(String nom) {
-		FichePlante fichePlante = fichePlanteRepo.getByNom(nom);
+		FichePlante fichePlante = fichePlanteRepo.findByNom(nom).orElseThrow(FichePlanteException::new);
 		return fichePlante.getId();
 	}
 
