@@ -73,10 +73,11 @@ import formation.sopra.vgarden.services.TerrainService;
 		@PostMapping("")
 		@JsonView(Views.Common.class)
 		@ResponseStatus(code = HttpStatus.CREATED)
-		public Terrain create(@Valid @RequestBody Terrain terrain, BindingResult br) {
+		public Terrain create(@AuthenticationPrincipal Compte compte, @Valid @RequestBody Terrain terrain, BindingResult br) {
 			if (br.hasErrors()) {
 				throw new TerrainException();
 			}
+			terrain.setUtilisateur(compte.getUtilisateur());
 			return terrainService.createOrUpdate(terrain);
 		}
 		
