@@ -43,6 +43,7 @@ public class Produit {
 	
 	@ManyToOne
 	@JoinColumn(name = "produit_utilisateur_id", foreignKey = @ForeignKey(name = "produit_utilisateur_fk"))
+	@JsonView(Views.Common.class)
 	private Utilisateur utilisateur;
 
 	public Produit() {

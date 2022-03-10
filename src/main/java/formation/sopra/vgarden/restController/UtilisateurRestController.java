@@ -34,8 +34,8 @@ public class UtilisateurRestController {
 
 	@GetMapping("/info")
 	@JsonView(Views.Common.class)
-	public Utilisateur getUtilisateur(@AuthenticationPrincipal Compte c) {
-		return c.getUtilisateur();
+	public Utilisateur getUtilisateur(@AuthenticationPrincipal Compte c) {		
+		return utilisateurServices.getByCompte(c);
 	}
 	
 	
@@ -52,6 +52,7 @@ public class UtilisateurRestController {
 			throw new UtilisateurException("Données incorrectes");
 		}
 		u.setCompte(c);
+		u.setPseudo(c.getLogin());
 		return utilisateurServices.create(u);
 	}
 	
@@ -63,6 +64,7 @@ public class UtilisateurRestController {
 		if (br.hasErrors()) {
 			throw new UtilisateurException("Données incorrectes");
 		}
+		u.setPseudo(c.getLogin());
 		return utilisateurServices.update(c, u);
 	}
 

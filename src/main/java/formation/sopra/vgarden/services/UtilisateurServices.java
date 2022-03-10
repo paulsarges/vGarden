@@ -25,7 +25,10 @@ public class UtilisateurServices {
 			new UtilisateurException("Aucun utilisateur associé"));
 		}
 		catch(UtilisateurException e) {
-			return null;
+			Utilisateur newUser = new Utilisateur();
+			newUser.setCompte(c);
+			newUser.setPseudo(c.getLogin());
+			return create(newUser);
 		}
 
 	}

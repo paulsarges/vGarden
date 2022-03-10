@@ -36,6 +36,8 @@ public class Utilisateur{
 	private Long id;
 	@JsonView(Views.Common.class)
 	protected double taxe;
+	@JsonView(Views.Common.class)
+	protected String pseudo;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "civilite", length = 4)
 	@JsonView(Views.Common.class)
@@ -140,6 +142,16 @@ public class Utilisateur{
 
 	public void setCompte(Compte compte) {
 		this.compte = compte;
+	}
+	
+	
+
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
 	}
 
 	public void acheter() {

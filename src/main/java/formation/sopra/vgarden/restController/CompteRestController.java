@@ -8,6 +8,9 @@ import formation.sopra.vgarden.model.Role;
 import formation.sopra.vgarden.model.Views;
 import formation.sopra.vgarden.repositories.CompteRepository;
 import formation.sopra.vgarden.services.CompteServices;
+import formation.sopra.vgarden.services.UtilisateurServices;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +25,8 @@ public class CompteRestController {
 	private final CompteServices compteServices;
 	private final CompteRepository compteRepo;
 	private final PasswordEncoder passwordEncoder;
+	@Autowired
+	private UtilisateurServices utilisateurServices;
 
 	public CompteRestController(CompteServices compteServices, CompteRepository compteRepo, PasswordEncoder passwordEncoder) {
 		this.compteServices = compteServices;
@@ -57,7 +62,9 @@ public class CompteRestController {
 			throw new CompteException("Utilisateur existant");
 		}
 		c.setRole(Role.ROLE_USER);
-		return compteServices.save(c);
+		Compte compte = compteServices.save(c);
+		utilisateurServices.getByCompte(compte);
+		return compte;
 	}
 
 	@DeleteMapping("/suppression")
