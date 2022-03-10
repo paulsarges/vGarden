@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "fiches_plante")
-@SequenceGenerator(name = "seqFichePlante", sequenceName = "seq_fiche_plante", initialValue = 53, allocationSize = 1)
+@SequenceGenerator(name = "seqFichePlante", sequenceName = "seq_fiche_plante", initialValue = 100, allocationSize = 1)
 public class FichePlante {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFichePlante")

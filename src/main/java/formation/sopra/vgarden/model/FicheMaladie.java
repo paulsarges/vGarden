@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "fiches_maladie")
-@SequenceGenerator(name = "seqFicheMaladie", sequenceName = "seq_fiche_maladie", initialValue = 14, allocationSize = 1)
+@SequenceGenerator(name = "seqFicheMaladie", sequenceName = "seq_fiche_maladie", initialValue = 100, allocationSize = 1)
 public class FicheMaladie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFicheMaladie")
