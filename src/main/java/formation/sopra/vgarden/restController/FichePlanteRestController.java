@@ -39,7 +39,7 @@ public class FichePlanteRestController {
         return fichePlanteService.getById(fichePlanteId);
     }
     
-    @GetMapping("/{nom}")
+    @GetMapping("/nom/{typePlante}")
     @JsonView(Views.Common.class)
     public FichePlante getByNom(@PathVariable String typePlante) {
     	return fichePlanteService.getByNom(typePlante);
